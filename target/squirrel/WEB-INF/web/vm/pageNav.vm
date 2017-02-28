@@ -1,0 +1,65 @@
+<nav class="text-center">
+    <ul class="pagination">
+        <li>
+            #if(${pageIndex}==1)
+                <a aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            #else
+                <a href="javascript:void(0);"
+                   onclick="$('${divId}').load('${url}&${pageIndexName}=1');" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            #end
+        </li>
+        <li>
+            #if(${pageIndex}==1)
+                <a aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            #else
+                #set($preIndex=${pageIndex} - 1)
+                <a href="javascript:void(0);"
+                   onclick="$('${divId}').load('${url}&${pageIndexName}=$preIndex');"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            #end
+        </li>
+        #foreach($item in ${navPageNums})
+            #if($item==${pageIndex})
+                <li class="active"><a>$item</a></li>
+            #else
+                <li><a href="javascript:void(0);"
+                       onclick="$('${divId}').load('${url}&${pageIndexName}=$item');">$item</a></li>
+            #end
+        #end
+        <li>
+            #if(${pageIndex}==${pages})
+                <a aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            #else
+                #set($index=${pageIndex} + 1)
+                <a href="javascript:void(0);"
+                   onclick="$('${divId}').load('${url}&${pageIndexName}=$index');"
+                   aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            #end
+        </li>
+        <li>
+            #if(${pageIndex}==${pages})
+                <a aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            #else
+                <a href="javascript:void(0);"
+                   onclick="$('${divId}').load('${url}&${pageIndexName}=${pages}');"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            #end
+        </li>
+    </ul>
+</nav>
