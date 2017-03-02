@@ -12,7 +12,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Login Page - Ace Admin</title>
+    <title>Login</title>
 
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -72,18 +72,18 @@
 
                                     <div class="space-6"></div>
 
-                                    <form>
+                                    <form action="login">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+															<input type="text" class="form-control" placeholder="Username" name="userName"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
+															<input type="password" class="form-control" placeholder="Password" name="password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>
@@ -91,7 +91,7 @@
                                             <div class="space"></div>
 
                                             <div class="clearfix">
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary js-login">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">Login</span>
                                                 </button>
@@ -102,13 +102,14 @@
                                     </form>
 
                                     <div class="social-or-login center">
-                                        <span class="bigger-110">Or Login Using</span>
+                                        <span class="bigger-110">messages</span>
                                     </div>
 
                                     <div class="space-6"></div>
 
                                 </div><!-- /.widget-main -->
-                                <span style="color: red;">${error}</span>
+                                <span style="text-align: center; margin-left: 30px;" class="label label-warning js-login-error">${error}</span>
+                                <span style="color: green; text-align: center; margin-left: 30px;" class="js-login-message"></span>
                                 <div class="toolbar clearfix">
                                     <div>
                                         <a href="#" data-target="#forgot-box" class="forgot-password-link">
@@ -183,41 +184,50 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" class="form-control js-email" placeholder="Email" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+                                            </label>
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control js-real-name" placeholder="realName" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+															<input type="text" class="form-control js-user-name" placeholder="Username" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
+															<input type="password" class="form-control js-password" placeholder="Password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Repeat password" />
+															<input type="password" class="form-control js-re-password" placeholder="Repeat password" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
                                             </label>
 
                                             <label class="block">
-                                                <input type="checkbox" class="ace" />
+                                                <input type="checkbox" class="ace js-accept-agreement" />
                                                 <span class="lbl">
 															I accept the
 															<a href="#">User Agreement</a>
 														</span>
                                             </label>
 
-                                            <div class="space-24"></div>
+                                            <div class="space-10">
+                                            </div>
+
+                                            <span class="label label-warning js-register-error"></span>
 
                                             <div class="clearfix">
                                                 <button type="reset" class="width-30 pull-left btn btn-sm">
@@ -225,7 +235,7 @@
                                                     <span class="bigger-110">Reset</span>
                                                 </button>
 
-                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
+                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success js-register">
                                                     <span class="bigger-110">Register</span>
 
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -289,9 +299,6 @@
             $(target).addClass('visible');//show target
         });
     });
-
-
-
     //you don't need this, just used for changing background
     jQuery(function($) {
         $('#btn-login-dark').on('click', function(e) {
@@ -316,6 +323,46 @@
             e.preventDefault();
         });
 
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('.js-login').click(function(){
+          $(this).parents("form").submit();
+        });
+
+        $(".js-register").click(function(){
+            if(!$(".js-accept-agreement").is(":checked")){
+               $(".js-register-error").text("请先勾选User Agreement吧~");
+                return;
+            }
+            $.ajax({
+                url:"register",
+                type:"post",
+                dataType:"json",
+                data:{
+                    userName:$(".js-user-name").val(),
+                    password:$(".js-password").val(),
+                    rePassword:$(".js-re-password").val(),
+                    email:$(".js-email").val(),
+                    realName:$(".js-real-name").val()
+                },
+                success:function(result){
+                    if(result.status){
+                        $(".back-to-login-link").click();
+                        $("input[name='userName']").eq(0).val($(".js-user-name").val());
+                        $("input[name='password']").eq(0).val();
+                        $(".js-login-error").val("");
+                        $(".js-login-message").val("注册成功，赶紧登录试试吧~");
+                    }else{
+                        $(".js-register-error").text(result.message);
+                    }
+                },
+                error:function(){
+                        $(".js-register-error").text("网络错误，快检查你的网络吧~");
+                }
+            });
+        });
     });
 </script>
 </body>

@@ -6,8 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import pojo.Enum.UserType;
+import pojo.dto.JsonResponse;
 import pojo.entity.SquirrelUser;
 import service.SquirrelUserService;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Administrator on 2017/2/27.
@@ -35,5 +41,47 @@ public class Login extends BasicController{
             getSession().setAttribute(SquirrelUser.SESSION_KIY,user);
         }
         return "redirect:/";
+    }
+    @RequestMapping("register")
+    @ResponseBody
+    public JsonResponse register(String userName, String password, String email, String realName, String rePassword){
+        String error = null;
+        if(StringUtils.isEmpty(userName)){
+            error = "用户名不可以为空哦~";
+        }else if(StringUtils.isEmpty(password)){
+            error = "密码不可以为空哦~";
+        }else if(!password.equals(rePassword)){
+            error = "两次输入的密码不同哦~";
+        }else if(!isEmail(email)){
+            error = "请输入合法的邮箱吧~";
+        }
+        if(StringUtils.isNotEmpty(error)){
+            return JsonResponse.ofFail(error);
+        }
+        SquirrelUser user = buildSquirrelUser(userName, password, email, realName);
+        squirrelUserService.insertSelective(user);
+        JsonResponse response = JsonResponse.ofSuccess();
+        response.put("message","注册成功，请登录吧~");
+        return response;
+    }
+
+    private boolean isEmail(String email) {
+        if(StringUtils.isEmpty(email)){
+            return false;
+        }
+        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        Pattern p = Pattern.compile(str);
+        Matcher m = p.matcher(email);
+        return m.matches();
+    }
+    private SquirrelUser buildSquirrelUser(String userName, String password, String email, String realName) {
+        SquirrelUser user = new SquirrelUser();
+        user.setEmail(email);
+        user.setMoney((double) 0);
+        user.setPassword(password);
+        user.setUserName(userName);
+        user.setRealName(realName);
+        user.setUserType((byte) UserType.consumer.getValue());
+        return user;
     }
 }

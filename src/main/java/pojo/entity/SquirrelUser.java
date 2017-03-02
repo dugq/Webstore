@@ -13,6 +13,16 @@ public class SquirrelUser {
 
     private Double money;
 
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public static String SESSION_KIY = "user_login";
 
     public Integer getUserId() {

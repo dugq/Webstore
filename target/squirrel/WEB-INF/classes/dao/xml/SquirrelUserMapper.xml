@@ -8,9 +8,10 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="user_type" property="userType" jdbcType="TINYINT" />
     <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_name, real_name, password, user_type, money
+    user_id, user_name, real_name, password, user_type, money,email
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,10 +25,10 @@
   </delete>
   <insert id="insert" parameterType="pojo.entity.SquirrelUser" >
     insert into squirrel_user (user_id, user_name, real_name, 
-      password, user_type, money
+      password, user_type, money,email
       )
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{userType,jdbcType=TINYINT}, #{money,jdbcType=DOUBLE}
+      #{password,jdbcType=VARCHAR}, #{userType,jdbcType=TINYINT}, #{money,jdbcType=DOUBLE}, #{email,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="pojo.entity.SquirrelUser" >
@@ -50,6 +51,8 @@
       </if>
       <if test="money != null" >
         money,
+      </if> <if test="email != null" >
+      email,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -70,6 +73,8 @@
       </if>
       <if test="money != null" >
         #{money,jdbcType=DOUBLE},
+      </if> <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -91,6 +96,9 @@
       <if test="money != null" >
         money = #{money,jdbcType=DOUBLE},
       </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -100,7 +108,8 @@
       real_name = #{realName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       user_type = #{userType,jdbcType=TINYINT},
-      money = #{money,jdbcType=DOUBLE}
+      money = #{money,jdbcType=DOUBLE},
+      email = #{email,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
