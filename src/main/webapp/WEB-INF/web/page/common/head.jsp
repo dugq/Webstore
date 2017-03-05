@@ -6,41 +6,38 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="navbar" class="navbar navbar-default          ace-save-state">
-    <div class="navbar-container ace-save-state" id="navbar-container">
-        <!-- #section:basics/sidebar.mobile.toggle -->
-        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
-            <span class="sr-only">Toggle sidebar</span>
+<div class="row row navbar-fixed-top">
+    <div class="col-md-12">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="navbar-header">
 
-            <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button> <a class="navbar-brand" href="#">DREAM</a>
+            </div>
 
-            <span class="icon-bar"></span>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">商城</a>
+                    </li>
+                    <li>
+                        <a href="/support/index">后台</a>
+                    </li>
+                    <li >
+                        <a href="#">管理员</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+                    <li>
+                        <a href="#" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 个人中心</a>
+                    </li>
+                    <li>
+                        <a href="#" >退出</a>
+                    </li>
+                </ul>
+            </div>
 
-            <span class="icon-bar"></span>
-        </button>
-
-        <!-- /section:basics/sidebar.mobile.toggle -->
-        <div class="navbar-header pull-left">
-            <!-- #section:basics/navbar.layout.brand -->
-            <a href="#" class="navbar-brand">
-                <small>
-                    <i class="fa fa-leaf"></i>
-                    天天商城
-                </small>
-            </a>
-
-            <!-- /section:basics/navbar.layout.brand -->
-
-            <!-- #section:basics/navbar.toggle -->
-
-            <!-- /section:basics/navbar.toggle -->
-        </div>
-
-        <!-- #section:basics/navbar.dropdown -->
-        <div class="navbar-buttons navbar-header pull-right" role="navigation">
-            fdasf
-        </div>
-
-        <!-- /section:basics/navbar.dropdown -->
-    </div><!-- /.navbar-container -->
+        </nav>
+    </div>
 </div>

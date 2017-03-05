@@ -7,9 +7,10 @@
     <result column="creation_time" property="creationTime" jdbcType="TIMESTAMP" />
     <result column="shopkeeper" property="shopkeeper" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, creation_time, shopkeeper, description
+    id, name, creation_time, shopkeeper, description, img_url
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,9 +24,11 @@
   </delete>
   <insert id="insert" parameterType="pojo.entity.SquirrelShops" >
     insert into squirrel_shops (id, name, creation_time, 
-      shopkeeper, description)
+      shopkeeper, description, img_url
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP}, 
-      #{shopkeeper,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR})
+      #{shopkeeper,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="pojo.entity.SquirrelShops" >
     insert into squirrel_shops
@@ -45,6 +48,9 @@
       <if test="description != null" >
         description,
       </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -61,6 +67,9 @@
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +88,9 @@
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -87,7 +99,8 @@
     set name = #{name,jdbcType=VARCHAR},
       creation_time = #{creationTime,jdbcType=TIMESTAMP},
       shopkeeper = #{shopkeeper,jdbcType=INTEGER},
-      description = #{description,jdbcType=VARCHAR}
+      description = #{description,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
