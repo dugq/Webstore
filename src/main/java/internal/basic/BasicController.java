@@ -11,7 +11,9 @@ import pojo.Enum.UserType;
 import pojo.entity.SquirrelUser;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -54,12 +56,18 @@ public  class BasicController  implements ApplicationContextAware, Serializable{
            }
        }
     }
+
     protected UserType getUserType() {
         if(!doseUserLogin()){
             return null;
         }else{
                 return UserType.valueOf(getMemoryUser().getUserType());
         }
+    }
+
+    protected void redirectClient(HttpServletRequest request, HttpServletResponse response, String redirectUri)
+            throws IOException {
+            response.sendRedirect(request.getContextPath() + redirectUri);
     }
 
     @Override

@@ -8,9 +8,10 @@
     <result column="shopkeeper" property="shopkeeper" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, creation_time, shopkeeper, description, img_url
+    id, name, creation_time, shopkeeper, description, img_url,status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,11 +24,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="pojo.entity.SquirrelShops" >
-    insert into squirrel_shops (id, name, creation_time, 
-      shopkeeper, description, img_url
+    insert into squirrel_shops (id, name, creation_time,
+      shopkeeper, description, img_url,status
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP}, 
-      #{shopkeeper,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP},
+      #{shopkeeper,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR},#{status,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="pojo.entity.SquirrelShops" >
@@ -51,6 +52,9 @@
       <if test="imgUrl != null" >
         img_url,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -70,6 +74,9 @@
       </if>
       <if test="imgUrl != null" >
         #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -91,6 +98,9 @@
       <if test="imgUrl != null" >
         img_url = #{imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +110,14 @@
       creation_time = #{creationTime,jdbcType=TIMESTAMP},
       shopkeeper = #{shopkeeper,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
-      img_url = #{imgUrl,jdbcType=VARCHAR}
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByShopperKepper" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from squirrel_shops
+  where shopkeeper = #{userId,jdbcType=INTEGER}
+  </select>
 </mapper>

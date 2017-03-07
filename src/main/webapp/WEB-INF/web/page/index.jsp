@@ -14,11 +14,15 @@
 
     <link href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/static/bootstrap/css/style.css" rel="stylesheet">
-
+  <script src="${pageContext.request.contextPath}/static/bootstrap/js/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/static/bootstrap/js/scripts.js"></script>
   </head>
   <body>
 <div class="container-fluid">
-	<jsp:include page="common/head.jsp"></jsp:include>
+	<jsp:include page="common/head.jsp">
+		<jsp:param name="flag" value="1"></jsp:param>
+	</jsp:include>
 	<div class="row" style="margin-top: 71px;">
 		<div class="col-md-2">
 		<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#FF905B; margin-top:43px;">
@@ -248,9 +252,6 @@
 </div>
     
 
-    <script src="${pageContext.request.contextPath}/static/bootstrap/js/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/bootstrap/js/scripts.js"></script>
   <script>
 	  $(".js-search").on('click',function(){
 	      window.location.href="${pageContext.request.contextPath}/webstore/webstore"

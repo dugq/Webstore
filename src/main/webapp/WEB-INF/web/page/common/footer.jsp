@@ -6,13 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="row" style="margin-top:20px;">
+<div class="row" style="background-color: #e7e7e7;">
     <div class="col-md-12" style="margin:0 auto;">
 
         <address style="text-align:center;">
-            <strong>个人创作</strong><br />
-            <br />我愿用我的勤劳创造属于我的天地<br />
-            <abbr title="Phone">P:110</abbr>
+            <br /> <strong>my dream!</strong><br />
         </address>
     </div>
 </div>

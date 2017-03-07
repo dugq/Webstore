@@ -33,15 +33,25 @@ public class Login extends BasicController{
     @RequestMapping("login")
     public String login(String userName, String password, Model model){
         if(StringUtils.isEmpty(userName) && StringUtils.isEmpty(password)){
-            model.addAttribute("error","账号或密码为空");
+            model.addAttribute("error","账号或密码为空~");
             return "login";
         }
         SquirrelUser user = squirrelUserService.selectByUserName(userName);
         if(user!=null && user.getPassword().equals(password.trim())){
             getSession().setAttribute(SquirrelUser.SESSION_KIY,user);
+        }else{
+            model.addAttribute("error","用户名或密码错误，请重试~");
+            return "login";
         }
         return "redirect:/";
     }
+
+    @RequestMapping("logout")
+    public String logout( Model model){
+        getSession().removeAttribute(SquirrelUser.SESSION_KIY);
+        return "redirect:/";
+    }
+
     @RequestMapping("register")
     @ResponseBody
     public JsonResponse register(String userName, String password, String email, String realName, String rePassword){

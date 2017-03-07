@@ -41,4 +41,9 @@ public class SquirrelShopsServiceImpl implements service.SquirrelShopsService {
     public int updateByPrimaryKey(SquirrelShops record) {
         return squirrelShopsMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public SquirrelShops selectByShopperKepper(Integer userId) {
+        return squirrelShopsMapper.selectByShopperKepper(userId);
+    }
 }

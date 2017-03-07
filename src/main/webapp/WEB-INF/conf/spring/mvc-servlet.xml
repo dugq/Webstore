@@ -12,21 +12,23 @@
     <import resource="mvc-common-config.xml"/>
 
     <!--<dubbo:annotation />-->
+    <mvc:default-servlet-handler/>
 
     <context:component-scan base-package="web" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
-   <!-- <mvc:interceptors>
-        &lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求
-        <bean class="com.host.app.web.interceptor.AllInterceptor"/>   &ndash;&gt;
+    <mvc:interceptors>
+        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求
+        <bean class="com.host.app.web.interceptor.AllInterceptor"/>   -->
         <mvc:interceptor >
-            <mvc:mapping path="/personal/student/*"/>
-            &lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;
-            <bean class="net.zdsoft.internal.interceptor.RequestFromZuoyeAutoLoginInterceptor"/>
+            <mvc:mapping path="/support/*"/>
+            <mvc:mapping path="/shopsManage/*"/>
+            <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+            <bean class="internal.intercepter.authIntercepter"/>
         </mvc:interceptor>
-    </mvc:interceptors> -->
+    </mvc:interceptors>
     <mvc:resources mapping="/static/**" location="/WEB-INF/web/static/" cache-period="#{24*60*60}"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

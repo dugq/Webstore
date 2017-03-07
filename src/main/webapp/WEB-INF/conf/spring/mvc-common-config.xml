@@ -26,8 +26,6 @@
         </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <!--<dubbo:annotation />-->
-    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="#{100*1024*1024}"/>
     </bean>

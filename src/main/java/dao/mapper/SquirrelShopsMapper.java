@@ -14,4 +14,6 @@ public interface SquirrelShopsMapper {
     int updateByPrimaryKeySelective(SquirrelShops record);
 
     int updateByPrimaryKey(SquirrelShops record);
+
+    SquirrelShops selectByShopperKepper(Integer userId);
 }

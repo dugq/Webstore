@@ -3,7 +3,10 @@ package service.impl;
 import dao.mapper.SquirrelCommodityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.dto.Pagination;
 import pojo.entity.SquirrelCommodity;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/2/27.
@@ -40,5 +43,11 @@ public class SquirrelCommodityServiceImpl implements service.SquirrelCommoditySe
     @Override
     public int updateByPrimaryKey(SquirrelCommodity record) {
         return squirrelCommodityMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<SquirrelCommodity> selectByShopId(Integer id, Pagination page) {
+        page.startPage();
+        return squirrelCommodityMapper.selectByShopId(id);
     }
 }

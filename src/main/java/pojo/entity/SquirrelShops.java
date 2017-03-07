@@ -13,6 +13,18 @@ public class SquirrelShops {
 
     private String description;
 
+    private String imgUrl;
+
+    private byte status;
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +63,13 @@ public class SquirrelShops {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
     }
 }

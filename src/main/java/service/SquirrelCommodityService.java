@@ -1,6 +1,9 @@
 package service;
 
+import pojo.dto.Pagination;
 import pojo.entity.SquirrelCommodity;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/2/27.
@@ -17,4 +20,6 @@ public interface SquirrelCommodityService {
     int updateByPrimaryKeySelective(SquirrelCommodity record);
 
     int updateByPrimaryKey(SquirrelCommodity record);
+
+    List<SquirrelCommodity> selectByShopId(Integer id, Pagination page);
 }

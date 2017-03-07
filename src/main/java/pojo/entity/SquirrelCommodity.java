@@ -21,6 +21,8 @@ public class SquirrelCommodity {
 
     private String imgUrl;
 
+    private Integer classId;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +93,13 @@ public class SquirrelCommodity {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 }
