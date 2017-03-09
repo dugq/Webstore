@@ -143,7 +143,7 @@
             });
         };
         loadPage("","","",1);
-        window.onscroll = function () {
+        $(window).on("scroll", function () {
             if(getDocumentTop()+getWindowHeight()>=getScrollHeight()){
                 $.ajax({
                     url:"searchMorePage",
@@ -166,7 +166,7 @@
                     }
                 });
             }
-        }
+        });
     });
 </script>
 </body>
