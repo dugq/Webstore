@@ -68,4 +68,19 @@
       creation_time = #{creationTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="dtoMap" type="pojo.dto.SquirrelClassificationDto" extends="BaseResultMap">
+    <result column="num" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectAllDtos" resultMap="dtoMap">
+    SELECT
+    c.id cid, c.name, c.creation_time,
+    (select count(*) from squirrel_commodity co WHERE co.class_id = cid) num
+    FROM squirrel_classification c
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from squirrel_classification
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
 </mapper>

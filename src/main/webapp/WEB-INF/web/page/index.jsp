@@ -25,21 +25,10 @@
 	</jsp:include>
 	<div class="row" style="margin-top: 71px;">
 		<div class="col-md-2">
-		<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#FF905B; margin-top:43px;">
-		  <li role="presentation" style="boder:1px solid black;"><a href="#">Home</a></li>
-		  <li role="presentation"><a href="#">Profile</a></li>
-		  <li role="presentation"><a href="#">Messages</a></li>
-		  <li role="presentation" style="boder:1px solid black;"><a href="#">Home</a></li>
-		  <li role="presentation"><a href="#">Profile</a></li>
-		  <li role="presentation"><a href="#">Messages</a></li>
-		  <li role="presentation" style="boder:1px solid black;"><a href="#">Home</a></li>
-		  <li role="presentation"><a href="#">Profile</a></li>
-		  <li role="presentation"><a href="#">Messages</a></li>
-		  <li role="presentation" style="boder:1px solid black;"><a href="#">Home</a></li>
-		  <li role="presentation"><a href="#">Profile</a></li>
-		  <li role="presentation"><a href="#">Messages</a></li>
-		 
-		
+			<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#FF905B;margin-top:43px;">
+				<c:forEach items="${list}" var="item" end="10">
+				<li role="presentation" style="boder:1px solid black;"><a href="#">${item.name}</a></li>
+				</c:forEach>
 		</ul>
 		</div>
 		<div class="col-md-8">

@@ -1,6 +1,9 @@
 package pojo.entity;
 
-public class SquirrelUser {
+import java.io.Serializable;
+
+public class SquirrelUser implements Serializable {
+    private static final long serialVersionUID = -364503448428875940L;
     private Integer userId;
 
     private String userName;

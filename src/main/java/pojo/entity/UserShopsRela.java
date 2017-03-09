@@ -1,8 +1,10 @@
 package pojo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserShopsRela {
+public class UserShopsRela implements Serializable{
+    private static final long serialVersionUID = 5315642886684412612L;
     private Integer id;
 
     private Integer userId;

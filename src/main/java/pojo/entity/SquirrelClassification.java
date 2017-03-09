@@ -1,8 +1,10 @@
 package pojo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SquirrelClassification {
+public class SquirrelClassification implements Serializable {
+    private static final long serialVersionUID = -3272023305371868113L;
     private Integer id;
 
     private String name;

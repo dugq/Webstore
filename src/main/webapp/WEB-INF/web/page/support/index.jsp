@@ -34,18 +34,17 @@
     <div class="row">
         <div class="col-md-2 js-sidebar"  style="background-color: #f2f2f2;padding: 0;">
             <div class="list-group"  style=";margin-top: 71px; ">
-                <a href="#" class="list-group-item">Home</a>
+                <a href="/support/classify/list" class="list-group-item active">商品分类管理</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item active">Help</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>
             </div>
         </div>
         <div class="col-md-10"  style=";margin-top: 71px;">
-            13123123123123333333333333333333333333333333333333333333333333333333
+            hello!
         </div>
     </div>
 </div>
