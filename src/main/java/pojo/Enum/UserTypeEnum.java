@@ -3,10 +3,10 @@ package pojo.Enum;
 /**
  * Created by Administrator on 2017/2/27.
  */
-public enum UserType {
+public enum UserTypeEnum {
     ADMIN(0),SHOPKEEPER(1),consumer(2),OTHER(-1);
     private int value;
-    UserType(int value){
+    UserTypeEnum(int value){
         this.value = value;
     }
     private String getDescrition(){
@@ -17,8 +17,8 @@ public enum UserType {
             default:return "其他";
         }
     }
-    public static UserType valueOf(int value) {
-        UserType temp = null;
+    public static UserTypeEnum valueOf(int value) {
+        UserTypeEnum temp = null;
         switch (value) {
             case 0:
                 temp = ADMIN;

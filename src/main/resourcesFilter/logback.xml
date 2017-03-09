@@ -43,13 +43,11 @@
     
     <logger name="org.apache.commons.beanutils.PropertyUtils" level="ERROR" />
 
-    <logger name="net.zdsoft.web" level="DEBUG" />
-    <logger name="net.zdsoft.service" level="DEBUG" />
-    <logger name="net.zdsoft.ws" level="DEBUG" />
-    <logger name="net.zdsoft.dubbo" level="DEBUG" />
-    <logger name="net.zdsoft.dao" level="DEBUG" />
-    <logger name="net.zdsoft.internal" level="DEBUG" />
-    <root level="ERROR">
+    <logger name="web" level="DEBUG" />
+    <logger name="service" level="DEBUG" />
+    <logger name="dao" level="DEBUG" />
+    <logger name="internal" level="DEBUG" />
+    <root level="DEBUG">
         <appender-ref ref="Console" />
         <appender-ref ref="R" />
     </root>

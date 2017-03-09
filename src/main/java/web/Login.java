@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pojo.Enum.UserType;
+import pojo.Enum.UserTypeEnum;
 import pojo.dto.JsonResponse;
 import pojo.entity.SquirrelUser;
 import service.SquirrelUserService;
@@ -91,7 +91,7 @@ public class Login extends BasicController{
         user.setPassword(password);
         user.setUserName(userName);
         user.setRealName(realName);
-        user.setUserType((byte) UserType.consumer.getValue());
+        user.setUserType((byte) UserTypeEnum.consumer.getValue());
         return user;
     }
 }

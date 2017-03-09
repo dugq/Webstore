@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import pojo.Enum.UserType;
+import pojo.Enum.UserTypeEnum;
 import pojo.entity.SquirrelUser;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +49,7 @@ public  class BasicController  implements ApplicationContextAware, Serializable{
        if(!doseUserLogin()){
            return false;
        }else{
-           if(getMemoryUser().getUserType()== UserType.ADMIN.getValue()){
+           if(getMemoryUser().getUserType()== UserTypeEnum.ADMIN.getValue()){
                return true;
            }else{
                return false;
@@ -57,11 +57,11 @@ public  class BasicController  implements ApplicationContextAware, Serializable{
        }
     }
 
-    protected UserType getUserType() {
+    protected UserTypeEnum getUserType() {
         if(!doseUserLogin()){
             return null;
         }else{
-                return UserType.valueOf(getMemoryUser().getUserType());
+                return UserTypeEnum.valueOf(getMemoryUser().getUserType());
         }
     }
 

@@ -1,10 +1,13 @@
 package service.impl;
 
+import com.github.pagehelper.PageHelper;
 import dao.mapper.SquirrelCommodityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.dto.Pagination;
+import pojo.dto.SquirrelCommodityDto;
 import pojo.entity.SquirrelCommodity;
+import pojo.entity.SquirrelShops;
 
 import java.util.List;
 
@@ -49,5 +52,11 @@ public class SquirrelCommodityServiceImpl implements service.SquirrelCommoditySe
     public List<SquirrelCommodity> selectByShopId(Integer id, Pagination page) {
         page.startPage();
         return squirrelCommodityMapper.selectByShopId(id);
+    }
+
+    @Override
+    public List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(String name, Integer shopId, Integer classId, String sortType,int pageIndex) {
+        PageHelper.startPage(pageIndex,12,sortType);
+        return squirrelCommodityMapper.selectDtoByNameShopIdClassIdAndSortType(name,shopId,classId);
     }
 }

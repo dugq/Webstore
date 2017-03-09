@@ -1,7 +1,9 @@
 package service;
 
 import pojo.dto.Pagination;
+import pojo.dto.SquirrelCommodityDto;
 import pojo.entity.SquirrelCommodity;
+import pojo.entity.SquirrelShops;
 
 import java.util.List;
 
@@ -22,4 +24,6 @@ public interface SquirrelCommodityService {
     int updateByPrimaryKey(SquirrelCommodity record);
 
     List<SquirrelCommodity> selectByShopId(Integer id, Pagination page);
+
+    List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(String name, Integer shopId, Integer classId, String sortType,int pageIndex);
 }

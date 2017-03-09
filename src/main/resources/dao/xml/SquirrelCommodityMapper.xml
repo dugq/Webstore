@@ -156,4 +156,29 @@
     from squirrel_commodity
     where shops_id = #{id,jdbcType=INTEGER}
   </select>
+  <resultMap id="dtoMap" type="pojo.dto.SquirrelCommodityDto">
+    <result column="sale_num" property="saleNum" jdbcType="INTEGER"></result>
+  </resultMap>
+  <select id="selectDtoByNameShopIdClassIdAndSortType" resultMap="dtoMap">
+    select
+    <include refid="Base_Column_List" />,
+    (select count(*) from user_shops_rela WHERE shop_id = id) sale_num
+    from squirrel_commodity
+    <where>
+      <trim prefixOverrides="and">
+        <if test="name != null and name != ''" >
+          and name like concat(#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="classId != null" >
+          and class_id = #{classId,jdbcType=INTEGER}
+        </if>
+        <if test="shopsId != null" >
+          and shops_id = #{shopsId,jdbcType=INTEGER}
+        </if>
+      </trim>
+    </where>
+
+  </select>
+
+
 </mapper>
