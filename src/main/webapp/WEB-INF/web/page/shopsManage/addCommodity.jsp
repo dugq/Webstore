@@ -42,7 +42,7 @@
                     <strong>${error}</strong>
                 </div>
             </c:if>
-            <form role="form" action="/shopsManage/commodityManage/addCommodity" type="post">
+            <form role="form" action="/shopsManage/commodityManage/addCommodity" method="post">
                 <input type="hidden" name="id" value="${commodity.id}"/>
                 <div class="form-group">
                     <label for="exampleInputEmail1">

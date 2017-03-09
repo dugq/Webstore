@@ -120,4 +120,8 @@
   from squirrel_shops
   where shopkeeper = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    from squirrel_shops
+  </select>
 </mapper>

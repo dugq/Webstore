@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.entity.SquirrelShops;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/2/27.
  */
@@ -45,5 +47,10 @@ public class SquirrelShopsServiceImpl implements service.SquirrelShopsService {
     @Override
     public SquirrelShops selectByShopperKepper(Integer userId) {
         return squirrelShopsMapper.selectByShopperKepper(userId);
+    }
+
+    @Override
+    public List<SquirrelShops> selectAll() {
+        return squirrelShopsMapper.selectAll();
     }
 }

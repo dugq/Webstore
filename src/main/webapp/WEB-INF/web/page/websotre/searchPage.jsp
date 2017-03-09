@@ -10,13 +10,14 @@
 <c:forEach items="${list}" var="item">
     <div class="col-md-3">
         <div class="thumbnail">
-            <img alt="Bootstrap Thumbnail Third" onerror="this.src='/static/image/hot-fuzz.jpg'" src=" ${item.imgUrl}" />
-            <div class="caption">
-                <h3>
+            <img alt="Bootstrap Thumbnail Third" onerror="this.src='/static/image/hot-fuzz.jpg'" src=" ${item.imgUrl}" style="height: 170px;"  />
+            <div class="caption" style="border-top: #ddd solid 1px;">
+                <h4 style="height: 19px;overflow: hidden;">
                     ${item.name}
-                </h3>
-                <p>
-                    ${item.description}
+                    <h6 style="text-align: right;">￥${item.price}</h6>
+                </h4>
+                <p style="height: 40px; overflow: hidden;">
+                    <span class="glyphicon glyphicon-hand-right" style="color: #a6e1ec;" aria-hidden="true"></span> &nbsp;${item.description}
                 </p>
                 <p>
                     <a class="btn btn-primary" href="#">查看</a> <a class="btn" href="#">购买</a>

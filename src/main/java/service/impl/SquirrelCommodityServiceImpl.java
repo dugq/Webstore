@@ -56,7 +56,7 @@ public class SquirrelCommodityServiceImpl implements service.SquirrelCommoditySe
 
     @Override
     public List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(String name, Integer shopId, Integer classId, String sortType,int pageIndex) {
-        PageHelper.startPage(pageIndex,12,sortType);
+        PageHelper.startPage(pageIndex,4,sortType);
         return squirrelCommodityMapper.selectDtoByNameShopIdClassIdAndSortType(name,shopId,classId);
     }
 }

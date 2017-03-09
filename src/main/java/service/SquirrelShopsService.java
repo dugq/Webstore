@@ -21,4 +21,6 @@ public interface SquirrelShopsService {
     int updateByPrimaryKey(SquirrelShops record);
 
     SquirrelShops selectByShopperKepper(Integer userId);
+
+    List<SquirrelShops> selectAll();
 }

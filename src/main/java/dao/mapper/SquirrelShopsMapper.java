@@ -2,6 +2,8 @@ package dao.mapper;
 
 import pojo.entity.SquirrelShops;
 
+import java.util.List;
+
 public interface SquirrelShopsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface SquirrelShopsMapper {
     int updateByPrimaryKey(SquirrelShops record);
 
     SquirrelShops selectByShopperKepper(Integer userId);
+
+    List<SquirrelShops> selectAll();
 }

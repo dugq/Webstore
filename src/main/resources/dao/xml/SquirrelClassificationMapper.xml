@@ -69,6 +69,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <resultMap id="dtoMap" type="pojo.dto.SquirrelClassificationDto" extends="BaseResultMap">
+    <result column="cid" property="id" jdbcType="INTEGER"></result>
     <result column="num" property="count" jdbcType="INTEGER" />
   </resultMap>
   <select id="selectAllDtos" resultMap="dtoMap">

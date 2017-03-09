@@ -11,10 +11,10 @@
 <table class="table">
     <thead>
     <tr>
-        <th>
+        <th style="width:5%;">
             序号
         </th>
-        <th>
+        <th style="width: 25%;">
             名称
         </th>
         <th>
@@ -23,7 +23,7 @@
         <th>
             数量
         </th>
-        <th>
+        <th style="width: 40%;">
             描述
         </th>
         <th>

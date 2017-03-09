@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.Enum.SortTypeEnum;
 import pojo.dto.JsonResponse;
+import pojo.dto.SquirrelClassificationDto;
 import pojo.dto.SquirrelCommodityDto;
+import pojo.entity.SquirrelShops;
+import service.SquirrelClassificationService;
 import service.SquirrelCommodityService;
+import service.SquirrelShopsService;
 
 import java.util.List;
 
@@ -21,10 +25,17 @@ import java.util.List;
 public class Webstore {
     @Autowired
     private SquirrelCommodityService squirrelCommodityService;
+    @Autowired
+    private SquirrelClassificationService squirrelClassificationService;
+    @Autowired
+    private SquirrelShopsService squirrelShopsService;
 
     @RequestMapping("webstore")
-    public String search() {
-
+    public String search(Model model) {
+        List<SquirrelClassificationDto> list = squirrelClassificationService.selectAllDtos();
+        List<SquirrelShops> squirrelShops = squirrelShopsService.selectAll();
+        model.addAttribute("classesList",list);
+        model.addAttribute("shopsList",squirrelShops);
         return "websotre/search";
     }
 

@@ -66,7 +66,7 @@ public class commodityManage extends BasicController{
             commodity.setShopsId(squirrelShops.getId());
             squirrelCommodityService.insertSelective(commodity);
         }else{
-            squirrelCommodityService.updateByPrimaryKey(commodity);
+            squirrelCommodityService.updateByPrimaryKeySelective(commodity);
         }
         return "redirect:/shopsManage/index?pageIndex=1";
     }
