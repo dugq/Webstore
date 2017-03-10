@@ -11,9 +11,9 @@ public enum UserTypeEnum {
     }
     private String getDescrition(){
         switch (value){
-            case 1: return "管理员";
-            case 2: return "商家";
-            case 3: return "消费者";
+            case 0: return "管理员";
+            case 1: return "商家";
+            case 2: return "消费者";
             default:return "其他";
         }
     }

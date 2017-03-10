@@ -22,7 +22,7 @@
                     <li class="js-webstore">
                         <a href="/">商城</a>
                     </li>
-                    <c:if test="${user_login.userType==2}">
+                    <c:if test="${user_login.userType==1}">
                         <li class="js-my-webstore">
                             <a href="/shopsManage/index">我的商城</a>
                         </li>

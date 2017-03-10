@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 3, from LayoutIt!</title>
+    <title>分类管理</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -35,9 +35,9 @@
     <div class="row">
         <div class="col-md-2 js-sidebar"  style="background-color: #f2f2f2;padding: 0;">
             <div class="list-group"  style=";margin-top: 71px; ">
+                <a href="/support/index" class="list-group-item">首页</a>
                 <a href="javascript:;" class="list-group-item active">商品分类管理</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
+                <a href="/support/shopManage/list" class="list-group-item">店铺管理</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>

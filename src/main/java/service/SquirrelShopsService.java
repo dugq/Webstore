@@ -1,5 +1,6 @@
 package service;
 
+import pojo.dto.SquirrelShopsDto;
 import pojo.entity.SquirrelShops;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface SquirrelShopsService {
     SquirrelShops selectByShopperKepper(Integer userId);
 
     List<SquirrelShops> selectAll();
+
+    List<SquirrelShopsDto> selectAllDto();
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.dto.JsonResponse;
 import pojo.dto.SquirrelClassificationDto;
+import pojo.dto.SquirrelShopsDto;
 import pojo.entity.SquirrelClassification;
 import pojo.entity.SquirrelShops;
 import pojo.entity.SquirrelUser;
@@ -43,7 +44,7 @@ public class Index extends BasicController{
     }
 
     @RequestMapping("classify/add")
-    private String addClassify(SquirrelClassification classification, Model model){
+    public String addClassify(SquirrelClassification classification, Model model){
         if(StringUtils.isEmpty(classification.getName())){
             model.addAttribute("error","名称不可为空。");
         }else if(  squirrelClassificationService.selectByName(classification.getName()).size()>0){
@@ -58,4 +59,24 @@ public class Index extends BasicController{
         return "support/listClassify";
     }
 
+    @RequestMapping("shopManage/list")
+    public String shopManageList( Model model){
+        List<SquirrelShopsDto> dtos= squirrelShopsService.selectAllDto();
+        model.addAttribute("list",dtos);
+        return "support/listShops";
+    }
+
+    @RequestMapping("shopManage/modifyShop")
+    @ResponseBody
+    public JsonResponse modifyShop(Integer id,Byte status){
+        if(isUserAdmin()){
+            SquirrelShops shop = new SquirrelShops();
+            shop.setId(id);
+            shop.setStatus(status);
+            squirrelShopsService.updateByPrimaryKeySelective(shop);
+            return JsonResponse.ofSuccess();
+        }else{
+            return JsonResponse.ofFail("没有权限");
+        }
+    }
 }

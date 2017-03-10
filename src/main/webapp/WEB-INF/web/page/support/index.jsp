@@ -34,9 +34,9 @@
     <div class="row">
         <div class="col-md-2 js-sidebar"  style="background-color: #f2f2f2;padding: 0;">
             <div class="list-group"  style=";margin-top: 71px; ">
-                <a href="/support/classify/list" class="list-group-item active">商品分类管理</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
+                <a href="#" class="list-group-item active">首页</a>
+                <a href="/support/classify/list" class="list-group-item">商品分类管理</a>
+                <a href="/support/shopManage/list" class="list-group-item">店铺管理</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>
                 <a href="#" class="list-group-item">Help</a>

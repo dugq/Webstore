@@ -3,6 +3,7 @@ package service.impl;
 import dao.mapper.SquirrelShopsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.dto.SquirrelShopsDto;
 import pojo.entity.SquirrelShops;
 
 import java.util.List;
@@ -52,5 +53,10 @@ public class SquirrelShopsServiceImpl implements service.SquirrelShopsService {
     @Override
     public List<SquirrelShops> selectAll() {
         return squirrelShopsMapper.selectAll();
+    }
+
+    @Override
+    public List<SquirrelShopsDto> selectAllDto() {
+        return squirrelShopsMapper.selectAllDto();
     }
 }

@@ -1,5 +1,6 @@
 package dao.mapper;
 
+import pojo.dto.SquirrelShopsDto;
 import pojo.entity.SquirrelShops;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface SquirrelShopsMapper {
     SquirrelShops selectByShopperKepper(Integer userId);
 
     List<SquirrelShops> selectAll();
+
+    List<SquirrelShopsDto> selectAllDto();
 }
