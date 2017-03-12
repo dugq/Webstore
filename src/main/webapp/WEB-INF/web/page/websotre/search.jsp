@@ -41,7 +41,7 @@
             <div  class="row">
                 <div class="col-md-2"></div>
                 <div class="input-group col-md-8" style="margin-bottom:10px;">
-                    <input type="text" class="form-control js-search-text" aria-label="Text input with multiple buttons"                                               placeholder="Search">
+                    <input type="text" class="form-control js-search-text" aria-label="Text input with multiple buttons"                                               placeholder="Search" value="${name}"/>
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default js-search" >搜索</button>
                     </div>
@@ -56,17 +56,43 @@
                             <div class="panel-heading">所有分类&gt;</div>
                             <div class="panel-body" style="border-bottom: #ddd solid 1px;">
                                 分类：
-                                <button type="button" class="btn btn-default js-class btn-info" data-value="">全部</button>
-                                <c:forEach items="${classesList}" var="item" >
-                                  <button type="button" class="btn btn-default js-class" data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
-                                </c:forEach>
+                                <c:if test="${classId==null}">
+                                    <button type="button" class="btn btn-default js-class btn-info" data-value="">全部</button>
+                                    <c:forEach items="${classesList}" var="item" >
+                                      <button type="button" class="btn btn-default js-class" data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${classId!=null}">
+                                    <button type="button" class="btn btn-default js-class" data-value="">全部</button>
+                                    <c:forEach items="${classesList}" var="item">
+                                        <c:if test="${classId==item.id}">
+                                            <button type="button" class="btn btn-default js-class btn-info" data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
+                                        </c:if>
+                                        <c:if test="${classId!=item.id}">
+                                            <button type="button" class="btn btn-default js-class" data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
                             </div>
                             <div class="panel-body"  style="border-bottom: #ddd solid 1px;">
                                 店铺：
-                                <button type="button" class="btn btn-default js-shop btn-info"  data-value="">全部</button>
+                                <c:if test="${shopId==null}">
+                                    <button type="button" class="btn btn-default js-shop btn-info"  data-value="">全部</button>
                                 <c:forEach items="${shopsList}" var="item" >
                                     <button type="button" class="btn btn-default js-shop"  data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
                                 </c:forEach>
+                                </c:if>
+                                <c:if test="${shopId!=null}">
+                                    <button type="button" class="btn btn-default js-shop"  data-value="">全部</button>
+                                    <c:forEach items="${shopsList}" var="item" >
+                                        <c:if test="${shopId==item.id}">
+                                            <button type="button" class="btn btn-default js-shop btn-info"  data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
+                                        </c:if>
+                                        <c:if test="${shopId!=item.id}">
+                                            <button type="button" class="btn btn-default js-shop"  data-value="${item.id}" style="margin: 3px 1px;">${item.name}</button>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
                             </div>
                             <div class="panel-body">
                                 排序：<a href="javascript:;" class="js-sort sortActive" data-value="0">价格排序
@@ -126,29 +152,41 @@
                     {{name}}
                     <h6 style="text-align: right;">￥{{price}}</h6>
                 </h4>
-                <p>
+                <p style="height: 40px; overflow: hidden;">
                     <span class="glyphicon glyphicon-hand-right" style="color: #a6e1ec;" aria-hidden="true"></span> &nbsp;{{description}}
                 </p>
                 <p>
-                    <a class="btn btn-primary" href="#">查看</a> <a class="btn" href="#">购买</a>
+                    <a class="btn btn-primary" href="javascript:;">立即购买</a>
                 </p>
             </div>
         </div>
     </div>
 </script>
+<script id="bodyModel" type="text/html">
+    <ul class="list-group">
+        <li class="list-group-item">名称：{{name}}</li>
+        <li class="list-group-item">价格：{{price}}</li>
+        <li class="list-group-item">介绍:{{description}}</li>
+        <li class="list-group-item">库存:{{sales}}件</li>
+    </ul>
+</script>
 <script>
     $(function(){
         var pageIndex=1;
-        var loadPage = function(name,classId,shopsId,sortType){
-            pageIndex=2;
-            $(".js-search-page").load("/webstore/searchPage",{
+        var loadPage = function(){
+            pageIndex=1;
+            $(".js-search-page").empty();
+            loadResource();
+           /* $(".js-search-page").load("/webstore/searchPage",{
                 name:$(".js-search-text").val() || "",
                 classId:$(".js-class.btn-info").data("value") || "",
                 shopId:$(".js-shop.btn-info").data("value") || "",
                 sortType:$(".js-sort.sortActive").attr("data-value")
-            });
+            });*/
         };
-        loadPage();
+        $(".js-search").on("click",function () {
+            loadPage();
+        });
 
         $(".js-class").on("click",function(){
             if(!$(this).hasClass("btn-info")){
@@ -184,33 +222,59 @@
                         loadPage();
                     }
                 });
-
+        function loadResource(){
+            $.ajax({
+                url:"searchMorePage",
+                data:{
+                    name:$(".js-search-text").val() || "",
+                    classId:$(".js-class.btn-info").attr("data-value") || "",
+                    shopId:$(".js-shop.btn-info").attr("data-value") || "",
+                    sortType:$(".js-sort.sortActive").attr("data-value"),
+                    pageIndex:pageIndex++
+                },
+                type:"post",
+                dataType:"json",
+                success:function(respose){
+                    if(respose.list && respose.list.length){
+                        for(var i = 0 ; i < respose.list.length;i++){
+                            var item = respose.list[i];
+                            var $template = $(template("shop",item));
+                            $template.find(".btn").click(function(){
+                                messagePanel.alert({
+                                    title:"请核对信息：",
+                                    body:template("bodyModel", item),
+                                    ok_fun:function(){
+                                        console.log(item);
+                                        $.ajax({
+                                            url:"buy",
+                                            data:{ id:item.id},
+                                            type:"post",
+                                            dataType:"json",
+                                            success:function(data){
+                                                messagePanel.alert(data.message);
+                                                if(data.status){
+                                                    item.sales = item.sales-1;
+                                                }
+                                            }
+                                        });
+                                    },
+                                    footer:'<button type="button" class="btn btn-primary js-ok">确认购买</button>'
+                                });
+                            });
+                            $(".js-search-page").append($template);
+                        }
+                    }else{
+                        $(".js-no-more").show();
+                    }
+                }
+            });
+        }
         $(window).on("scroll", function () {
             if(getDocumentTop()+getWindowHeight()>=getScrollHeight()){
-                $.ajax({
-                    url:"searchMorePage",
-                    data:{
-                        name:$(".js-search-text").val() || "",
-                        classId:$(".js-class.btn-info").attr("data-value") || "",
-                        shopId:$(".js-shop.btn-info").attr("data-value") || "",
-                        sortType:$(".js-sort.sortActive").attr("data-value"),
-                        pageIndex:pageIndex++
-                    },
-                    type:"post",
-                    dataType:"json",
-                    success:function(respose){
-                        if(respose.list && respose.list.length){
-                            for(var i = 0 ; i < respose.list.length;i++){
-                                console.log(respose.list[i]);
-                                $(".js-search-page").append(template("shop",respose.list[i]));
-                            }
-                        }else{
-                            $(".js-no-more").show();
-                        }
-                    }
-                });
+                loadResource();
             }
         });
+        loadPage();
     });
 </script>
 </body>

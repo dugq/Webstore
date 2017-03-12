@@ -1,5 +1,7 @@
 package web.webstore;
 
+import internal.basic.BasicController;
+import net.sf.json.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,13 @@ import pojo.Enum.SortTypeEnum;
 import pojo.dto.JsonResponse;
 import pojo.dto.SquirrelClassificationDto;
 import pojo.dto.SquirrelCommodityDto;
+import pojo.entity.SquirrelCommodity;
 import pojo.entity.SquirrelShops;
-import service.SquirrelClassificationService;
-import service.SquirrelCommodityService;
-import service.SquirrelShopsService;
+import pojo.entity.SquirrelUser;
+import pojo.entity.UserShopsRela;
+import service.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,20 +26,28 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("webstore")
-public class Webstore {
+public class Webstore extends BasicController{
+    private static final long serialVersionUID = -8140277508472633799L;
     @Autowired
     private SquirrelCommodityService squirrelCommodityService;
     @Autowired
     private SquirrelClassificationService squirrelClassificationService;
     @Autowired
     private SquirrelShopsService squirrelShopsService;
+    @Autowired
+    private UserShopsRelaService userShopsRelaService;
+    @Autowired
+    private SquirrelUserService squirrelUserService;
 
     @RequestMapping("webstore")
-    public String search(Model model) {
+    public String search(Integer classId,Integer shopId,String name, Model model) {
         List<SquirrelClassificationDto> list = squirrelClassificationService.selectAllDtos();
         List<SquirrelShops> squirrelShops = squirrelShopsService.selectAll();
         model.addAttribute("classesList",list);
         model.addAttribute("shopsList",squirrelShops);
+        model.addAttribute("classId",classId);
+        model.addAttribute("shopId",shopId);
+        model.addAttribute("name",name);
         return "websotre/search";
     }
 
@@ -53,6 +65,38 @@ public class Webstore {
         JsonResponse response = JsonResponse.ofSuccess();
         response.put("list",squirrelCommodityDtos);
         return response;
+    }
+
+    @RequestMapping("buy")
+    @ResponseBody
+    public JsonResponse buy(Integer id){
+        if(id ==null){
+            return  JsonResponse.ofFail("请选择商品~");
+        }
+        if(!doseUserLogin()){
+            return JsonResponse.ofFail("请先登录哦~");
+        }
+        SquirrelCommodity squirrelCommodity = squirrelCommodityService.selectByPrimaryKey(id);
+        if(squirrelCommodity==null){
+            return  JsonResponse.ofFail("该商品不存在或已下架~");
+        }
+        if(squirrelCommodity.getSales()<=0){
+            return  JsonResponse.ofFail("该刷新页面喽~宝贝已被抢空啦~");
+        }
+        SquirrelUser user = getMemoryUser();
+        if(user.getMoney()<squirrelCommodity.getPrice()){
+            return  JsonResponse.ofFail("余额不足啦~赶紧充值哦~");
+        }
+        squirrelCommodity.setSales(squirrelCommodity.getSales()-1);
+        squirrelCommodityService.updateByPrimaryKeySelective(squirrelCommodity);
+        UserShopsRela rela = new UserShopsRela();
+        rela.setCreationTime(new Date());
+        rela.setShopId(squirrelCommodity.getId());
+        rela.setUserId(getMemoryUser().getUserId());
+        userShopsRelaService.insertSelective(rela);
+        user.setMoney(user.getMoney()-squirrelCommodity.getPrice());
+        squirrelUserService.updateByPrimaryKeySelective(user);
+        return JsonResponse.ofSuccess();
     }
 }
 

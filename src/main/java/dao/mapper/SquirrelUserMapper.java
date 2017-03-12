@@ -1,7 +1,10 @@
 package dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import pojo.dto.UserShopsRelaDto;
 import pojo.entity.SquirrelUser;
+
+import java.util.List;
 
 public interface SquirrelUserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -17,4 +20,6 @@ public interface SquirrelUserMapper {
     int updateByPrimaryKey(SquirrelUser record);
 
     SquirrelUser selectByUserName(@Param("userName") String userName);
+
+    List<UserShopsRelaDto> selectDtosByUserId(Integer id);
 }

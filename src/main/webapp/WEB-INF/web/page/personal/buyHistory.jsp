@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>管理员后台</title>
+    <title>个人中心</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -28,23 +29,59 @@
 <body>
 
 <jsp:include page="../common/head.jsp">
-    <jsp:param name="flag" value="2"></jsp:param>
+    <jsp:param name="flag" value="4"></jsp:param>
 </jsp:include>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 js-sidebar"  style="background-color: #f2f2f2;padding: 0;">
             <div class="list-group"  style=";margin-top: 71px; ">
-                <a href="#" class="list-group-item active">首页</a>
-                <a href="/support/classify/list" class="list-group-item">商品分类管理</a>
-                <a href="/support/shopManage/list" class="list-group-item">店铺管理</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
+                <a href="/personal/index" class="list-group-item">基本信息</a>
+                <a href="javascript:;" class="list-group-item active">购买记录</a>
             </div>
         </div>
         <div class="col-md-10"  style=";margin-top: 71px;">
-            hello!
+            <table class="table">
+                <thead>
+                <tr class="info">
+                    <th style="width:5%;">
+                        序号
+                    </th>
+                    <th style="width: 25%;">
+                        名称
+                    </th>
+                    <th>
+                        价格
+                    </th>
+                    <th style="width: 40%;">
+                        描述
+                    </th>
+                    <th>
+                        购买时间
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${list}" var="item"  varStatus="var">
+                    <tr class="warning">
+                        <td>
+                                ${var.count}
+                        </td>
+                        <td>
+                                ${item.name}
+                        </td>
+                        <td>
+                                ${item.price}
+                        </td>
+                        <td>
+                                ${item.description}
+                        </td>
+                        <td>
+                               <fmt:formatDate value="${item.creationTime}" pattern="yyyy年MM月dd日"></fmt:formatDate>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

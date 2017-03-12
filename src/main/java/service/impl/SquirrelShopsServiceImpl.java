@@ -1,5 +1,6 @@
 package service.impl;
 
+import com.github.pagehelper.PageHelper;
 import dao.mapper.SquirrelShopsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,11 @@ public class SquirrelShopsServiceImpl implements service.SquirrelShopsService {
     @Override
     public List<SquirrelShopsDto> selectAllDto() {
         return squirrelShopsMapper.selectAllDto();
+    }
+
+    @Override
+    public List<SquirrelShops> selectAllWithPage(Integer pageIndex) {
+        PageHelper.startPage(pageIndex,12,"creation_time");
+        return squirrelShopsMapper.selectAll();
     }
 }

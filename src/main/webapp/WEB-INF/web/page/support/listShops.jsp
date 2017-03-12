@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${list}" var="item" varStatus="var">
-                        <td>${var.count}</td>
+                       <tr> <td>${var.count}</td>
                         <td >${item.name}</td>
                         <td>${item.shopkeeperName}</td>
                         <td >${item.description}</td>
@@ -74,6 +74,7 @@
                             </c:if>
                             <button data-id="${item.id}">查看</button>
                         </td>
+                       </tr>
                     </c:forEach>
                 </tbody>
             </table>

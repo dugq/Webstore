@@ -79,4 +79,15 @@
       creation_time = #{creationTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="dtoMap" type="pojo.dto.UserShopsRelaDto" extends="BaseResultMap">
+    <result property="name" column="cname"></result>
+    <result property="price" column="price"></result>
+    <result property="description" column="description"></result>
+  </resultMap>
+  <select id="selectDtosByUserId" resultMap="dtoMap" parameterType="java.lang.Integer">
+    select u.*,c.name cname ,c.price,c.description
+    from user_shops_rela u LEFT JOIN squirrel_commodity c on u.shop_id = c.id where u.user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY creation_time DESC
+  </select>
 </mapper>

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 3, from LayoutIt!</title>
+    <title>首页</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -17,8 +17,11 @@
   <script src="${pageContext.request.contextPath}/static/bootstrap/js/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
   <script src="${pageContext.request.contextPath}/static/bootstrap/js/scripts.js"></script>
+  <script src="${pageContext.request.contextPath}/static/js/squirrel.js"></script>
+  <script src="${pageContext.request.contextPath}/static/js/template.js"></script>
   </head>
   <body>
+  <div id="top"></div>
 <div class="container-fluid">
 	<jsp:include page="common/head.jsp">
 		<jsp:param name="flag" value="1"></jsp:param>
@@ -27,13 +30,13 @@
 		<div class="col-md-2">
 			<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#FF905B;margin-top:43px;">
 				<c:forEach items="${list}" var="item" end="10">
-				<li role="presentation" style="boder:1px solid black;"><a href="#">${item.name}</a></li>
+				<li role="presentation" style="boder:1px solid black;"><a href="${pageContext.request.contextPath}/webstore/webstore?classId=${item.id}">${item.name}</a></li>
 				</c:forEach>
 		</ul>
 		</div>
 		<div class="col-md-8">
 		<div class="input-group" style="margin-bottom:10px; width:80%; margin-left:10%;">
-          <input type="text" class="form-control" aria-label="Text input with multiple buttons" placeholder="Search">
+          <input type="text" class="form-control js-name" aria-label="Text input with multiple buttons" placeholder="Search">
           <div class="input-group-btn">
             <button type="button" class="btn btn-default js-search" >搜索</button>
           </div>
@@ -111,140 +114,67 @@
 		</div>
 	</div>
 	<div class="row" style="margin:20px auto;">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Second" src="http://lorempixel.com/output/city-q-c-600-200-1.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Third" src="http://lorempixel.com/output/sports-q-c-600-200-1.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Second" src="http://lorempixel.com/output/city-q-c-600-200-1.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Third" src="http://lorempixel.com/output/sports-q-c-600-200-1.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<ul class="pagination pagination-sm" style="margin:0 40%;width:20%;">
-				<li>
-					<a href="#">Prev</a>
-				</li>
-				<li>
-					<a href="#">1</a>
-				</li>
-				<li>
-					<a href="#">2</a>
-				</li>
-				<li>
-					<a href="#">3</a>
-				</li>
-				<li>
-					<a href="#">4</a>
-				</li>
-				<li>
-					<a href="#">5</a>
-				</li>
-				<li>
-					<a href="#">Next</a>
-				</li>
-			</ul>
+		<div class="col-md-12" id="shopsDiv">
+
 		</div>
+	</div>
+	<div class="alert alert-info center-block js-no-more" role="alert" style="display: none;">
+		<strong class="center-block text-center">已经到底啦!</strong>
 	</div>
 	<jsp:include page="common/footer.jsp"/>
 </div>
-    
+  <a class="navbar-fixed-bottom" style="bottom: 50px; left: 90%;font-size:25px;color: #FF905B" href="#top">
+	  <span class="glyphicon glyphicon-circle-arrow-up" style="display: block;" aria-hidden="true"></span>
+	  <span style="font-size: 12px; display: block;">顶部</span>
+  </a>
+<script id="shop" type="text/html">
+	<div class="col-md-3">
+		<div class="thumbnail">
+			<img alt="Bootstrap Thumbnail Third" src="{{imgUrl}}" style="height: 200px;" />
+			<div class="caption">
+				<h3>
+					{{name}}
+				</h3>
+				<p style="height: 100px;overflow: hidden;">
+					{{description}}
+				</p>
+				<p>
+					<a class="btn btn-primary" data-id="{{id}}" href="${pageContext.request.contextPath}/webstore/webstore?shopId={{id}}">逛逛</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</script>
 
   <script>
 	  $(".js-search").on('click',function(){
-	      window.location.href="${pageContext.request.contextPath}/webstore/webstore"
+	      window.location.href="${pageContext.request.contextPath}/webstore/webstore?name="+($(".js-name").val() || "")
 	  });
+	  $(function () {
+	      var pageIndex = 1;
+		  var loadShops = function(){
+		      $.ajax({
+		          url:"loadPage",
+				  data:{ pageIndex:pageIndex++},
+				  dataType:"json",
+				  type:"post",
+				  success:function(data){
+					 if(data.list && data.list.length){
+					     for(var i =0; i < data.list.length;i++){
+					         $("#shopsDiv").append(template("shop",data.list[i]));
+						 }
+					 }else{
+						$(".js-no-more").show();
+					 }
+				  }
+			  });
+		  }
+		  loadShops();
+          $(window).on("scroll", function () {
+              if(getDocumentTop()+getWindowHeight()>=getScrollHeight()) {
+                  loadShops();
+		  	}});
+      });
   </script>
   </body>
 </html>

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:forEach items="${list}" var="item">
+<%--<c:forEach items="${list}" var="item">
     <div class="col-md-3">
         <div class="thumbnail">
             <img alt="Bootstrap Thumbnail Third" onerror="this.src='/static/image/hot-fuzz.jpg'" src=" ${item.imgUrl}" style="height: 170px;"  />
@@ -20,9 +20,9 @@
                     <span class="glyphicon glyphicon-hand-right" style="color: #a6e1ec;" aria-hidden="true"></span> &nbsp;${item.description}
                 </p>
                 <p>
-                    <a class="btn btn-primary" href="#">查看</a> <a class="btn" href="#">购买</a>
+                    <a class="btn btn-primary" href="#"  data-toggle="modal" data-target="#myModal">购买</a>
                 </p>
             </div>
         </div>
     </div>
-</c:forEach>
+</c:forEach>--%>

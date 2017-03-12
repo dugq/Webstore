@@ -26,4 +26,6 @@ public interface SquirrelShopsService {
     List<SquirrelShops> selectAll();
 
     List<SquirrelShopsDto> selectAllDto();
+
+    List<SquirrelShops> selectAllWithPage(Integer pageIndex);
 }

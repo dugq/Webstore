@@ -40,8 +40,8 @@
                         </li>
                     </c:if>
                     <c:if test="${user_login!=null}">
-                        <li>
-                            <a href="#" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>                                      个人中心</a>
+                        <li  class="js-personal">
+                            <a href="/personal/index" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>个人中心</a>
                         </li>
                         <li>
                             <a href="/logout" >退出</a>
@@ -54,12 +54,41 @@
     </div>
 </div>
 <script>
+    if(!console){
+        var pool = [];
+        window.console = {
+            log:function(arument){
+                pool.push(arument);
+            }
+        }
+    }
     var flag = "<%=request.getParameter("flag")%>";
-    if(flag==3){
-    $(".js-support").addClass("active");
+    if(flag==4){
+        $(".js-personal").addClass("active");
+    }else if(flag==3){
+        $(".js-support").addClass("active");
     }else if(flag==2){
         $(".js-my-webstore").addClass("active");
     }else{
         $(".js-webstore").addClass("active");
     }
+</script>
+<script id="messagePanelModel" type="text/html">
+<div class="modal fade" id="messagePanelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog {{size}}" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{#title}}</h4>
+            </div>
+            <div class="modal-body">
+                {{#body}}
+            </div>
+            <div class="modal-footer">
+               {{#footer}}
+            </div>
+        </div>
+    </div>
+</div>
 </script>

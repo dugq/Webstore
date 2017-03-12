@@ -3,7 +3,10 @@ package service.impl;
 import dao.mapper.UserShopsRelaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.dto.UserShopsRelaDto;
 import pojo.entity.UserShopsRela;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/2/27.
@@ -40,5 +43,10 @@ public class UserShopsRelaServiceImpl implements service.UserShopsRelaService {
     @Override
     public int updateByPrimaryKey(UserShopsRela record) {
         return userShopsRelaMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<UserShopsRelaDto> selectDtosByUserId(Integer userId) {
+        return userShopsRelaMapper.selectDtosByUserId(userId);
     }
 }

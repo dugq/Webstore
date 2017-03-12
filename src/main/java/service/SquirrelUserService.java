@@ -1,6 +1,9 @@
 package service;
 
+import pojo.dto.UserShopsRelaDto;
 import pojo.entity.SquirrelUser;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/2/27.
@@ -19,4 +22,5 @@ public interface SquirrelUserService {
     int updateByPrimaryKey(SquirrelUser record);
 
     SquirrelUser selectByUserName(String userName);
+
 }
