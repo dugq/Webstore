@@ -49,4 +49,9 @@ public class SquirrelUserServiceImpl implements service.SquirrelUserService {
     public SquirrelUser selectByUserName(String userName) {
         return squirrelUserMapper.selectByUserName(userName);
     }
+
+    @Override
+    public List<SquirrelUser> selectAll() {
+        return squirrelUserMapper.selectAll();
+    }
 }

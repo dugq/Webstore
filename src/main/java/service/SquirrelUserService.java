@@ -23,4 +23,5 @@ public interface SquirrelUserService {
 
     SquirrelUser selectByUserName(String userName);
 
+    List<SquirrelUser> selectAll();
 }

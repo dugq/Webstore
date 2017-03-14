@@ -39,10 +39,7 @@
                 <a href="/support/index" class="list-group-item">首页</a>
                 <a href="/support/classify/list" class="list-group-item">商品分类管理</a>
                 <a href="javascript:;" class="list-group-item active">店铺管理</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
-                <a href="#" class="list-group-item">Help</a>
+                <a href="/support/personalManage/list" class="list-group-item">用户管理</a>
             </div>
         </div>
         <div class="col-md-10"  style=";margin-top: 71px;">

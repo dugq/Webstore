@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pojo.Enum.UserTypeEnum;
 import pojo.dto.JsonResponse;
 import pojo.dto.SquirrelClassificationDto;
 import pojo.dto.SquirrelShopsDto;
@@ -15,6 +16,7 @@ import pojo.entity.SquirrelShops;
 import pojo.entity.SquirrelUser;
 import service.SquirrelClassificationService;
 import service.SquirrelShopsService;
+import service.SquirrelUserService;
 
 import java.util.Date;
 import java.util.List;
@@ -29,6 +31,8 @@ public class Index extends BasicController{
     private SquirrelShopsService squirrelShopsService;
     @Autowired
     private SquirrelClassificationService squirrelClassificationService;
+    @Autowired
+    private SquirrelUserService squirrelUserService;
 
     @RequestMapping("index")
     private String index(Model model){
@@ -78,5 +82,31 @@ public class Index extends BasicController{
         }else{
             return JsonResponse.ofFail("没有权限");
         }
+    }
+    @RequestMapping("personalManage/list")
+    public String personalManageList( Model model){
+        List<SquirrelUser> dtos = squirrelUserService.selectAll();
+        model.addAttribute("list",dtos);
+        return "support/listPerson";
+    }
+
+    @RequestMapping("personalManage/modifyPersonalInfo")
+    @ResponseBody
+    public JsonResponse modifyPersonalInfo(Integer type,Double money,Integer id){
+        if(id == null){
+            return JsonResponse.ofFail("用户为空！");
+        }
+        if(type == null && money==null){
+            return JsonResponse.ofFail("参数为空！");
+        }
+        SquirrelUser user = squirrelUserService.selectByPrimaryKey(id);
+        if(type!=null){
+            user.setUserType((byte) UserTypeEnum.SHOPKEEPER.getValue());
+        }
+        if(money!=null){
+            user.setMoney(user.getMoney()+money);
+        }
+        squirrelUserService.updateByPrimaryKeySelective(user);
+        return JsonResponse.ofSuccess();
     }
 }

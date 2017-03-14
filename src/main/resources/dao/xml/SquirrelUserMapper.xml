@@ -119,4 +119,10 @@
     from squirrel_user
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from squirrel_user
+  </select>
 </mapper>

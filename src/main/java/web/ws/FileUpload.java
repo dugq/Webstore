@@ -23,7 +23,6 @@ public class FileUpload extends BasicController{
     @RequestMapping("upload")
     @ResponseBody
     public JsonResponse upload(@RequestParam("file") MultipartFile[] files) {
-
         String path = getSession().getServletContext().getRealPath("/files");
         try {
             MultipartFile file = files[0];
@@ -37,13 +36,14 @@ public class FileUpload extends BasicController{
             File f = new File(destFile.getAbsoluteFile() + File.separator + fileName);
             // 如果当前文件已经存在了，就跳过。
             if (f.exists()) {
-                return JsonResponse.ofFail("文件已经存在！");
+                JsonResponse response = JsonResponse.ofSuccess();
+                response.put("url","/files"+File.separator + curDate+ File.separator +getMemoryUser().getUserName() + File.separator + fileName);
+                return response;
             }
             file.transferTo(f);
             f.createNewFile();
-            log.debug("文件保存成功！");
             JsonResponse response = JsonResponse.ofSuccess();
-            response.put("url","/files"+File.separator + curDate+ File.separator +getMemoryUser()                            .getUserName() + File.separator + fileName);
+            response.put("url","/files"+File.separator + curDate+ File.separator +getMemoryUser().getUserName() + File.separator + fileName);
             return response;
         }
         catch (Exception e) {

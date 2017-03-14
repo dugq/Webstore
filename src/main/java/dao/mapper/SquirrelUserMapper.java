@@ -22,4 +22,6 @@ public interface SquirrelUserMapper {
     SquirrelUser selectByUserName(@Param("userName") String userName);
 
     List<UserShopsRelaDto> selectDtosByUserId(Integer id);
+
+    List<SquirrelUser> selectAll();
 }

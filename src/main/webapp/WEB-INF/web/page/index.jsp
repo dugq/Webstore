@@ -29,7 +29,7 @@
 	<div class="row" style="margin-top: 71px;">
 		<div class="col-md-2">
 			<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#FF905B;margin-top:43px;">
-				<c:forEach items="${list}" var="item" end="10">
+				<c:forEach items="${list}" var="item" end="11">
 				<li role="presentation" style="boder:1px solid black;"><a href="${pageContext.request.contextPath}/webstore/webstore?classId=${item.id}">${item.name}</a></li>
 				</c:forEach>
 		</ul>
@@ -52,35 +52,35 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="item active">
-						<img alt="Carousel Bootstrap First" src="http://lorempixel.com/output/sports-q-c-1600-500-1.jpg" style="height:500px;" />
+						<img alt="Carousel Bootstrap First" src="/static/image/label3.jpg" style="height:500px;margin: 0 auto;" />
 						<div class="carousel-caption">
 							<h4>
-								First Thumbnail label
+								我有一个梦想
 							</h4>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								想一件事就要立刻去做，不要想后果，也不要看结果，只体会其中做事的感觉，相信自己的感觉，不会错，每天在生活，工作中，体会每天的充实，那样的人生才叫完美，才能体现人生的价值，一生才能无憾！
 							</p>
 						</div>
 					</div>
 					<div class="item">
-						<img alt="Carousel Bootstrap Second" src="http://lorempixel.com/output/sports-q-c-1600-500-2.jpg" style="height:500px;" />
+						<img alt="Carousel Bootstrap Second" src="/static/image/label2.png" style="height:500px;margin: 0 auto;" />
 						<div class="carousel-caption">
 							<h4>
-								Second Thumbnail label
+								时间不老，我们不散
 							</h4>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								有的人一生默默无闻，有的人一生轰轰烈烈，甚至千古流芳，为什么会这样？因为默默无闻的人只是满足于现状，而不去想怎么轰轰烈烈过一生，不要求自己，去做，去行动，怎么能够成功？
 							</p>
 						</div>
 					</div>
 					<div class="item">
-						<img alt="Carousel Bootstrap Third" src="http://lorempixel.com/output/sports-q-c-1600-500-3.jpg" style="height:500px;"  />
+						<img alt="Carousel Bootstrap Third" src="/static/image/label1.jpg" style="height:500px;"  />
 						<div class="carousel-caption">
 							<h4>
-								Third Thumbnail label
+								懂得低头，才能出头。
 							</h4>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								自暴自弃便是命运的奴隶，自强不息是生命的天使；我不想用别人的汗水浇灌自己的心灵，我愿意用别人的棉袄，来温暖自己的躯体。我只想堂堂正正的做人，我只愿光明磊落做事，该记得的我不会遗忘，该遗忘的我不会存放。
 							</p>
 						</div>
 					</div>
