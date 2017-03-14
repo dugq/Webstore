@@ -150,7 +150,7 @@
             <div class="caption" style="border-top: #ddd solid 1px;">
                 <h4 style="height: 19px;overflow: hidden;">
                     {{name}}
-                    <h6 style="text-align: right;">￥{{price}}</h6>
+                    <h6 style="text-align: right;">单价：￥{{price}}</h6>
                 </h4>
                 <p style="height: 40px; overflow: hidden;">
                     <span class="glyphicon glyphicon-hand-right" style="color: #a6e1ec;" aria-hidden="true"></span> &nbsp;{{description}}
@@ -165,9 +165,11 @@
 <script id="bodyModel" type="text/html">
     <ul class="list-group">
         <li class="list-group-item">名称：{{name}}</li>
-        <li class="list-group-item">价格：{{price}}</li>
+        <li class="list-group-item">价格：￥{{price}}</li>
         <li class="list-group-item">介绍:{{description}}</li>
         <li class="list-group-item">库存:{{sales}}件</li>
+        <li class="list-group-item"><input id="num" type="number"/> </li>
+        <li class="list-group-item">总价： <span id="totalNum"></span></li>
     </ul>
 </script>
 <script>
@@ -240,14 +242,24 @@
                             var item = respose.list[i];
                             var $template = $(template("shop",item));
                             $template.find(".btn").click(function(){
+                              $(document).off("change","#num");
+                              $(document).on("change","#num",function(){
+                                if($("#num").val()<=0){
+                                  $("#num").val(1);
+                                }
+                                if($("#num").val()>item.sales){
+                                  $("#num").val(item.sales);
+                                }
+                                var value = parseInt($("#num").val())*item.price;
+                                $("#totalNum").text("￥"+value);
+                              });
                                 messagePanel.alert({
                                     title:"请核对信息：",
                                     body:template("bodyModel", item),
                                     ok_fun:function(){
-                                        console.log(item);
                                         $.ajax({
                                             url:"buy",
-                                            data:{ id:item.id},
+                                            data:{ id:item.id,num:$("#num").val()},
                                             type:"post",
                                             dataType:"json",
                                             success:function(data){

@@ -69,7 +69,7 @@ public class Webstore extends BasicController{
 
     @RequestMapping("buy")
     @ResponseBody
-    public JsonResponse buy(Integer id){
+    public JsonResponse buy(Integer id,@RequestParam(defaultValue = "1") Integer num){
         if(id ==null){
             return  JsonResponse.ofFail("请选择商品~");
         }
@@ -84,18 +84,21 @@ public class Webstore extends BasicController{
             return  JsonResponse.ofFail("该刷新页面喽~宝贝已被抢空啦~");
         }
         SquirrelUser user = getMemoryUser();
-        if(user.getMoney()<squirrelCommodity.getPrice()){
+        if(user.getMoney()<squirrelCommodity.getPrice()*num){
             return  JsonResponse.ofFail("余额不足啦~赶紧充值哦~");
         }
-        squirrelCommodity.setSales(squirrelCommodity.getSales()-1);
+        squirrelCommodity.setSales(squirrelCommodity.getSales()-num);
         squirrelCommodityService.updateByPrimaryKeySelective(squirrelCommodity);
         UserShopsRela rela = new UserShopsRela();
         rela.setCreationTime(new Date());
         rela.setShopId(squirrelCommodity.getId());
         rela.setUserId(getMemoryUser().getUserId());
         userShopsRelaService.insertSelective(rela);
-        user.setMoney(user.getMoney()-squirrelCommodity.getPrice());
+        user.setMoney(user.getMoney()-squirrelCommodity.getPrice()*num);
         squirrelUserService.updateByPrimaryKeySelective(user);
+        SquirrelUser sale = squirrelUserService.selectByPrimaryKey(squirrelCommodity.getShopsId());
+        sale.setMoney(sale.getMoney()+squirrelCommodity.getPrice()*num);
+        squirrelUserService.updateByPrimaryKeySelective(sale);
         return JsonResponse.ofSuccess();
     }
 }

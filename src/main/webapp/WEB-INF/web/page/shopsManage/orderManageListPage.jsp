@@ -77,13 +77,16 @@
             </td>
             <td>
                 <c:if test="${item.status==1}">
-                    <button>关闭</button>
+                    <button data-id="${item.id}" class="js-close" data-value="4">关闭</button>
                 </c:if>
                 <c:if test="${item.status==2}">
-                    <button>同意退货</button>
+                    <button data-id="${item.id}" class="js-agree" data-value="3">同意退货</button>
                 </c:if>
-                <c:if test="${item.status!=1}">
-                    <span disabled>已关闭</span>
+                <c:if test="${item.status==4}">
+                    <span >交易完成</span>
+                </c:if>
+                <c:if test="${item.status==3}">
+                    <span >已退货</span>
                 </c:if>
             </td>
         </tr>
@@ -91,3 +94,34 @@
     </tbody>
 </table>
 <jsp:include page="../common/page.jsp"/>
+<script>
+    $(function(){
+      $(".js-close").click(function(){
+        var fun = function(){
+          $(this).parent().empty().append("<span >交易完成</span>");
+        };
+        modify.call(this,fun);
+      });
+      $(".js-agree").click(function(){
+        var fun = function(){
+          $(this).parent().empty().append("<span >已退货</span>");
+        };
+        modify.call(this,fun);
+      });
+      function modify(fun){
+        var data={
+          id:$(this).data("id"),
+          status:$(this).data("value")
+        }
+        $.ajax({
+          url:"/shopsManage/orderManage/modify",
+          data:data,
+          type:"post",
+          dataType:"json",
+          success:function(){
+            fun();
+          }
+        });
+      }
+    })
+</script>
