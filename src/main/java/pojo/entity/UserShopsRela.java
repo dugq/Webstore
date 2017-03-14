@@ -13,6 +13,26 @@ public class UserShopsRela implements Serializable{
 
     private Date creationTime;
 
+    private Byte status;
+
+    private Integer num;
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     public Integer getId() {
         return id;
     }

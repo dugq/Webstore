@@ -1,5 +1,6 @@
 package dao.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import pojo.dto.UserShopsRelaDto;
 import pojo.entity.UserShopsRela;
 
@@ -19,4 +20,6 @@ public interface UserShopsRelaMapper {
     int updateByPrimaryKey(UserShopsRela record);
 
     List<UserShopsRelaDto> selectDtosByUserId(Integer userId);
+
+    List<UserShopsRelaDto> selectDtosByShopIdAndStatus(@Param("shopId") Integer shopId, @Param("status") Byte status);
 }

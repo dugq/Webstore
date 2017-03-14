@@ -40,7 +40,7 @@
         </li>
         <c:forEach items="${page.navPageNums}" var="item">
             <c:if test="${item==page.pageIndex}">
-                <li class="active"><a>$item</a></li>
+                <li class="active"><a>${item}</a></li>
             </c:if>
             <c:if test="${item!=page.pageIndex}">
                 <li><a href="javascript:void(0);"
@@ -54,7 +54,7 @@
                     <span aria-hidden="true">&gt;</span>
                 </a>
             </c:if>
-            <c:if test="${page.pages == page.pageIndex}">
+            <c:if test="${page.pages != page.pageIndex}">
                 <a href="javascript:void(0);"
                    onclick="$('<%=request.getParameter("navDiv")%>').load('${page.url}&${page.pageIndexName}=${page.pageIndex+1}');"
                    aria-label="Next">

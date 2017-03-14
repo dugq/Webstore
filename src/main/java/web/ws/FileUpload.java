@@ -1,6 +1,5 @@
 package web.ws;
 
-import com.alibaba.fastjson.JSON;
 import internal.basic.BasicController;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.stereotype.Controller;
@@ -19,11 +18,12 @@ import java.util.Date;
 @Controller
 @RequestMapping("file")
 public class FileUpload extends BasicController{
+    String filePath = "/opt/data";
 
     @RequestMapping("upload")
     @ResponseBody
     public JsonResponse upload(@RequestParam("file") MultipartFile[] files) {
-        String path = getSession().getServletContext().getRealPath("/files");
+        String path = getSession().getServletContext().getRealPath(filePath);
         try {
             MultipartFile file = files[0];
             String curDate = DateFormatUtils.format(new Date(), "yyyyMMdd");
@@ -37,13 +37,13 @@ public class FileUpload extends BasicController{
             // 如果当前文件已经存在了，就跳过。
             if (f.exists()) {
                 JsonResponse response = JsonResponse.ofSuccess();
-                response.put("url","/files"+File.separator + curDate+ File.separator +getMemoryUser().getUserName() + File.separator + fileName);
+                response.put("url", filePath +File.separator + curDate+ File.separator +getMemoryUser().getUserName() + File.separator + fileName);
                 return response;
             }
             file.transferTo(f);
             f.createNewFile();
             JsonResponse response = JsonResponse.ofSuccess();
-            response.put("url","/files"+File.separator + curDate+ File.separator +getMemoryUser().getUserName() + File.separator + fileName);
+            response.put("url", filePath +File.separator + curDate+ File.separator +getMemoryUser().getUserName() + File.separator + fileName);
             return response;
         }
         catch (Exception e) {

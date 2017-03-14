@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 3, from LayoutIt!</title>
+    <title>我的商城</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -45,6 +45,11 @@
                 <c:if test="${shop!=null && shop.status==3}">
                     <li data-target="b">
                         <a href="javascript:;">商品管理</a>
+                    </li>
+                </c:if>
+                <c:if test="${shop!=null && shop.status==3}">
+                    <li data-target="c">
+                        <a href="javascript:;">訂單管理</a>
                     </li>
                 </c:if>
             </ul>
@@ -84,10 +89,12 @@
                     </button>
             </div>
 
-            <div id="b" style="display: none;">
+            <div id="b" style="display: none;padding-top: 20px;">
 
             </div>
+            <div id="c" style="display: none;padding-top: 20px;">
 
+            </div>
         </div>
     </div>
 </div>
@@ -99,10 +106,17 @@
            if($(this).data("target")=="a"){
                $("#a").show();
                $("#b").hide();
-           }else{
+                $("#c").hide();
+           }else  if($(this).data("target")=="b"){
                $("#b").children().length || $("#b").load("/shopsManage/commodityManage",{pageIndex:1});
                $("#b").show();
                $("#a").hide();
+               $("#c").hide();
+           }else{
+             $("#c").children().length || $("#c").load("/shopsManage/orderManage",{pageIndex:1});
+             $("#c").show();
+             $("#a").hide();
+             $("#b").hide();
            }
            $(".js-list>li").removeClass("active");
            $(this).addClass("active");

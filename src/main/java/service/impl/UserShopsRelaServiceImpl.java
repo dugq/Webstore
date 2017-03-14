@@ -1,5 +1,6 @@
 package service.impl;
 
+import com.github.pagehelper.PageHelper;
 import dao.mapper.UserShopsRelaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,11 @@ public class UserShopsRelaServiceImpl implements service.UserShopsRelaService {
     @Override
     public List<UserShopsRelaDto> selectDtosByUserId(Integer userId) {
         return userShopsRelaMapper.selectDtosByUserId(userId);
+    }
+
+    @Override
+    public List<UserShopsRelaDto> selectDtosByShopIdAndStutas(Integer pageIndex, Integer shopId,Byte status) {
+        PageHelper.startPage(pageIndex,10);
+        return userShopsRelaMapper.selectDtosByShopIdAndStatus(shopId,status);
     }
 }

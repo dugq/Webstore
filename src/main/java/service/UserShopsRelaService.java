@@ -22,4 +22,6 @@ public interface UserShopsRelaService {
     int updateByPrimaryKey(UserShopsRela record);
 
     List<UserShopsRelaDto> selectDtosByUserId(Integer userId);
+
+    List<UserShopsRelaDto> selectDtosByShopIdAndStutas(Integer pageIndex, Integer shopId,Byte status);
 }
