@@ -46,21 +46,31 @@
                     <th style="width:5%;">
                         序号
                     </th>
-                    <th style="width: 25%;">
+                    <th style="width: 20%;">
                         名称
                     </th>
                     <th>
                         价格
                     </th>
-                    <th style="width: 40%;">
+                    <th>
+                        數量
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th style="width: 20%;">
                         描述
                     </th>
                     <th>
                         购买时间
                     </th>
+                    <th>
+                        操作
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
+                <jsp:useBean id="nowDate" class="java.util.Date"/>
                 <c:forEach items="${list}" var="item"  varStatus="var">
                     <tr class="warning">
                         <td>
@@ -73,10 +83,42 @@
                                 ${item.price}
                         </td>
                         <td>
-                                ${item.description}
+                                ${item.num}
                         </td>
                         <td>
-                               <fmt:formatDate value="${item.creationTime}" pattern="yyyy年MM月dd日"></fmt:formatDate>
+                            <c:if test="${item.status==0}">
+                                卖家准备中
+                            </c:if>
+                            <c:if test="${item.status==1}">
+                                配送中
+                            </c:if>
+                            <c:if test="${item.status==2}">
+                                已收货
+                            </c:if>
+                            <c:if test="${item.status==3}">
+                                申请退货
+                            </c:if>
+                            <c:if test="${item.status==4}">
+                                已退货
+                            </c:if>
+                            <c:if test="${item.status==5}">
+                                交易成功
+                            </c:if>
+                        </td>
+                        <td>
+                                ${item.description}
+                        </td>
+                        <c:set var="interval" value="${nowDate.time - item.creationTime.time}"/>
+                        <td>
+                            <fmt:formatDate value="${item.creationTime}" pattern="yyyy年MM月dd日"></fmt:formatDate>
+                        </td>
+                        <td>
+                            <c:if test="${item.status==1}">
+                                <button data-id="${item.id}" class="js-ok" data-value="2">确认收货</button>
+                            </c:if>
+                            <c:if test="${item.status==0 || item.status==1}">
+                                <button data-id="${item.id}" class="js-back" data-value="3">申请退货</button>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -94,6 +136,28 @@
                 $('.js-sidebar').height(document.body.offsetHeight);
             }
         }).trigger("resize");
+      $(".js-ok").click(function(){
+        modify.call(this,"<span >操作成功</span>");
+      });
+      $(".js-back").click(function(){
+        modify.call(this,"<span >操作成功</span>");
+      });
+      function modify(text){
+        var data={
+          id:$(this).data("id"),
+          status:$(this).data("value")
+        };
+        var $that = $(this);
+        $.ajax({
+          url:"/shopsManage/orderManage/modify",
+          data:data,
+          type:"post",
+          dataType:"json",
+          success:function(){
+            $that.parent().empty().append(text);
+          }
+        });
+      }
     })
 </script>
 </body>

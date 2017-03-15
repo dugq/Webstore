@@ -114,7 +114,8 @@
   </select>
   <select id="selectDtosByShopIdAndStatus" resultMap="dtoMap" parameterType="java.lang.Integer">
     select u.*,c.name cname ,c.price,c.description
-    from user_shops_rela u LEFT JOIN squirrel_commodity c on u.shop_id = c.id where u.shop_id = #{shopId,jdbcType=INTEGER}
+    from user_shops_rela u LEFT JOIN squirrel_commodity c on u.shop_id = c.id where u.shop_id in
+    (select id from squirrel_commodity co where  co.shops_id = #{shopId,jdbcType=INTEGER})
     <if test="status != null" >
       and status=#{status,jdbcType=TINYINT}
     </if>

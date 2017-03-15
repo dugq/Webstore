@@ -47,6 +47,8 @@ public class OrderManage extends BasicController {
         List<UserShopsRelaDto> dtos = userShopsRelaService.selectDtosByShopIdAndStutas(pageIndex,squirrelShops.getId(),status);
         PageInfo pageInfo = new PageInfo(dtos);
         ForegroundPagination page = ForegroundPagination.valueOf(pageInfo);
+        page.setNavigatePage(5);
+        page.setUrl("/shopsManage/orderManage/orderPage?");
         model.addAttribute("list",dtos);
         model.addAttribute("page",page);
         return "shopsManage/orderManageListPage";

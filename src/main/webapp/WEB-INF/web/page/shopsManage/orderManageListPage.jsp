@@ -38,6 +38,7 @@
     </tr>
     </thead>
     <tbody>
+    <jsp:useBean id="nowDate" class="java.util.Date"/>
     <c:forEach items="${list}" var="item"  varStatus="var">
         <tr class="warning">
             <td>
@@ -54,38 +55,48 @@
             </td>
             <td>
                 <c:if test="${item.status==0}">
-                    配送中
+                    新订单
                 </c:if>
                 <c:if test="${item.status==1}">
-                    已收货
+                    配送中
                 </c:if>
                 <c:if test="${item.status==2}">
-                    申请退货
+                    已收货
                 </c:if>
                 <c:if test="${item.status==3}">
-                    已退货
+                    申请退货
                 </c:if>
                 <c:if test="${item.status==4}">
+                    已退货
+                </c:if>
+                <c:if test="${item.status==5}">
                     交易成功
                 </c:if>
             </td>
             <td>
                     ${item.description}
             </td>
+            <c:set var="interval" value="${nowDate.time - item.creationTime.time}"/>
             <td>
                 <fmt:formatDate value="${item.creationTime}" pattern="yyyy年MM月dd日"></fmt:formatDate>
             </td>
             <td>
-                <c:if test="${item.status==1}">
-                    <button data-id="${item.id}" class="js-close" data-value="4">关闭</button>
+                <c:if test="${item.status==0}">
+                    <button data-id="${item.id}" class="js-send" data-value="1">确认发货</button>
                 </c:if>
-                <c:if test="${item.status==2}">
-                    <button data-id="${item.id}" class="js-agree" data-value="3">同意退货</button>
+                <c:if test="${item.status==1 && interval/1000/60/60/24<3}">
+                    <span>配送中</span>
                 </c:if>
-                <c:if test="${item.status==4}">
-                    <span >交易完成</span>
+                <c:if test="${item.status==2 || (interval/1000/60/60/24>3 && item.status==1)}">
+                    <button data-id="${item.id}" class="js-close" data-value="5">关闭</button>
                 </c:if>
                 <c:if test="${item.status==3}">
+                    <button data-id="${item.id}" class="js-agree" data-value="4">同意退货</button>
+                </c:if>
+                <c:if test="${item.status==5}">
+                    <span >交易完成</span>
+                </c:if>
+                <c:if test="${item.status==4}">
                     <span >已退货</span>
                 </c:if>
             </td>
@@ -97,29 +108,27 @@
 <script>
     $(function(){
       $(".js-close").click(function(){
-        var fun = function(){
-          $(this).parent().empty().append("<span >交易完成</span>");
-        };
-        modify.call(this,fun);
+        modify.call(this,"<span >交易完成</span>");
       });
       $(".js-agree").click(function(){
-        var fun = function(){
-          $(this).parent().empty().append("<span >已退货</span>");
-        };
-        modify.call(this,fun);
+        modify.call(this,"<span >已退货</span>");
       });
-      function modify(fun){
+      $(".js-send").click(function(){
+        modify.call(this,"<span>配送中</span>");
+      });
+      function modify(text){
         var data={
           id:$(this).data("id"),
           status:$(this).data("value")
-        }
+        };
+        var $that = $(this);
         $.ajax({
           url:"/shopsManage/orderManage/modify",
           data:data,
           type:"post",
           dataType:"json",
           success:function(){
-            fun();
+            $that.parent().empty().append(text);
           }
         });
       }

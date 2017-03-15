@@ -14,11 +14,12 @@
         <div class="panel-body" style="border-bottom: #ddd solid 1px;">
             分类：
                 <button type="button" class="btn btn-default js-status btn-info" data-value="" data-value="">全部</button>
-                <button type="button" class="btn btn-default js-status" data-value="0" style="margin: 3px 1px;">配送中</button>
-                <button type="button" class="btn btn-default js-status" data-value="1" style="margin: 3px 1px;">已收货</button>
-                <button type="button" class="btn btn-default js-status" data-value="2" style="margin: 3px 1px;">申请退货</button>
-                <button type="button" class="btn btn-default js-status" data-value="3" style="margin: 3px 1px;">已经退货</button>
-                <button type="button" class="btn btn-default js-status" data-value="4" style="margin: 3px 1px;">交易成功</button>
+                <button type="button" class="btn btn-default js-status" data-value="0" style="margin: 3px 1px;">新订单</button>
+                <button type="button" class="btn btn-default js-status" data-value="1" style="margin: 3px 1px;">配送中</button>
+                <button type="button" class="btn btn-default js-status" data-value="2" style="margin: 3px 1px;">已收货</button>
+                <button type="button" class="btn btn-default js-status" data-value="3" style="margin: 3px 1px;">申请退货</button>
+                <button type="button" class="btn btn-default js-status" data-value="4" style="margin: 3px 1px;">已经退货</button>
+                <button type="button" class="btn btn-default js-status" data-value="5" style="margin: 3px 1px;">交易成功</button>
         </div>
     </div>
    <div id="orderPage"></div>

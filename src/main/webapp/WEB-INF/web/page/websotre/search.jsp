@@ -168,7 +168,7 @@
         <li class="list-group-item">价格：￥{{price}}</li>
         <li class="list-group-item">介绍:{{description}}</li>
         <li class="list-group-item">库存:{{sales}}件</li>
-        <li class="list-group-item"><input id="num" type="number"/> </li>
+        <li class="list-group-item">数量：<input id="num" type="number"/> </li>
         <li class="list-group-item">总价： <span id="totalNum"></span></li>
     </ul>
 </script>

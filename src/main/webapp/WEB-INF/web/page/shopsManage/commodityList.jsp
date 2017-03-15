@@ -62,5 +62,6 @@
     </c:forEach>
     </tbody>
 </table>
-<a href="/shopsManage/commodityManage/toAddCommodity">新增</a>
+<a href="/shopsManage/commodityManage/toAddCommodity" style="margin-right: 100px;float: right;">新增</a>
+<jsp:include page="../common/page.jsp"></jsp:include>
 
