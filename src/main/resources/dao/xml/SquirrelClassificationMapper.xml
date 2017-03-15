@@ -75,7 +75,7 @@
   <select id="selectAllDtos" resultMap="dtoMap">
     SELECT
     c.id cid, c.name, c.creation_time,
-    (select count(*) from squirrel_commodity co WHERE co.class_id = cid) num
+    (select sum(sales) from squirrel_commodity co WHERE co.class_id = cid) num
     FROM squirrel_classification c
   </select>
   <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >

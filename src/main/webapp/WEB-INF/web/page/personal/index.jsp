@@ -60,7 +60,7 @@
             </div>
             <div class="input-group" style="margin-top: 10px;">
                 <span class="input-group-addon">余额：</span>
-                <input type="text" class="form-control" placeholder="请输入充值金额" readonly="readonly" aria-label="Amount (to the nearest dollar)" value="${user.money}"/>
+                <input type="number" min="1" class="form-control" placeholder="请输入充值金额" readonly="readonly" aria-label="Amount (to the nearest dollar)" value="${user.money}"/>
                 <span class="input-group-addon js-modify" data-flag="false"><button>充值</button></span>
                 <span class="input-group-addon js-commit" style="display: none;"><button>确定</button></span>
             </div>

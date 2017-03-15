@@ -115,21 +115,23 @@
                         <h4 style="color:red;">hot:</h4>
                         <table class="table">
                             <tbody>
-                            <tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr><tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr><tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr><tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr><tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr><tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr><tr>
-                                <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-                            </tr>
+                            <c:forEach items="${list}" var="item" varStatus="var">
+                                <tr>
+                                    <td>
+                                        <div style="display: inline-block; float: left;"  data-value='${item}'>
+                                            <a href="javascript:;" class="js-hot">
+                                                <img src="${item.imgUrl}" onerror="this.src='/static/image/label3.jpg'" style="width: 50%; float: left; margin-top:10px;"/>
+                                            </a>
+                                            <div style="display: inline-block; float: left;width: 45%;margin-left: 3%;">
+                                                <h6>${item.name}</h6>
+                                                <h6>销量:${item.sales}</h6>
+                                                <small style="white-space:nowrap;overflow: hidden;text-overflow: ellipsis;width: 100px;">${item.description}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+
                             </tbody>
                         </table>
                     </div>
@@ -168,8 +170,8 @@
         <li class="list-group-item">价格：￥{{price}}</li>
         <li class="list-group-item">介绍:{{description}}</li>
         <li class="list-group-item">库存:{{sales}}件</li>
-        <li class="list-group-item">数量：<input id="num" type="number"/> </li>
-        <li class="list-group-item">总价： <span id="totalNum"></span></li>
+        <li class="list-group-item">数量：<input id="num" type="number" placeholder="请输入购买数量"/> </li>
+        <li class="list-group-item">总价： <span id="totalNum">￥0</span></li>
     </ul>
 </script>
 <script>
@@ -206,6 +208,11 @@
             }
         });
 
+        $(".js-hot").on("click",function(){
+          var item = $(this).parent().data("value");
+          shopping(item);
+        });
+
         $(".js-sort").on("click",function(){
                     if(!$(this).hasClass("sortActive")){
                         $(".js-sort").removeClass("sortActive");
@@ -224,6 +231,38 @@
                         loadPage();
                     }
                 });
+        function shopping (item){
+          $(document).off("change","#num");
+          $(document).on("change","#num",function(){
+            if($("#num").val()<=0){
+              $("#num").val(1);
+            }
+            if($("#num").val()>item.sales){
+              $("#num").val(item.sales);
+            }
+            var value = parseInt($("#num").val())*item.price;
+            $("#totalNum").text("￥"+value);
+          });
+          messagePanel.alert({
+            title:"请核对信息：",
+            body:template("bodyModel", item),
+            ok_fun:function(){
+              $.ajax({
+                url:"buy",
+                data:{ id:item.id,num:$("#num").val()},
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                  messagePanel.alert(data.message);
+                  if(data.status){
+                    item.sales = item.sales-1;
+                  }
+                }
+              });
+            },
+            footer:'<button type="button" class="btn btn-primary js-ok">确认购买</button>'
+          });
+        }
         function loadResource(){
             $.ajax({
                 url:"searchMorePage",
@@ -242,36 +281,7 @@
                             var item = respose.list[i];
                             var $template = $(template("shop",item));
                             $template.find(".btn").click(function(){
-                              $(document).off("change","#num");
-                              $(document).on("change","#num",function(){
-                                if($("#num").val()<=0){
-                                  $("#num").val(1);
-                                }
-                                if($("#num").val()>item.sales){
-                                  $("#num").val(item.sales);
-                                }
-                                var value = parseInt($("#num").val())*item.price;
-                                $("#totalNum").text("￥"+value);
-                              });
-                                messagePanel.alert({
-                                    title:"请核对信息：",
-                                    body:template("bodyModel", item),
-                                    ok_fun:function(){
-                                        $.ajax({
-                                            url:"buy",
-                                            data:{ id:item.id,num:$("#num").val()},
-                                            type:"post",
-                                            dataType:"json",
-                                            success:function(data){
-                                                messagePanel.alert(data.message);
-                                                if(data.status){
-                                                    item.sales = item.sales-1;
-                                                }
-                                            }
-                                        });
-                                    },
-                                    footer:'<button type="button" class="btn btn-primary js-ok">确认购买</button>'
-                                });
+                              shopping(item);
                             });
                             $(".js-search-page").append($template);
                         }

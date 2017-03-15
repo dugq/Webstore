@@ -54,13 +54,13 @@
                     <label for="exampleInputPassword1">
                         价格
                     </label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" name="price" value="${commodity.price}"/>
+                    <input type="number" min="1" max="1000" class="form-control" id="exampleInputPassword1" name="price" value="${commodity.price}"/>
                 </div>
                 <div class="form-group">
                     <label for="sales">
                         数量
                     </label>
-                    <input type="text" class="form-control" id="sales" name="sales" value="${commodity.sales}"/>
+                    <input type="number" min="1" max="1000" class="form-control" id="sales" name="sales" value="${commodity.sales}"/>
                 </div>
                 <div class="form-group">
                     <label for="description">
@@ -69,10 +69,25 @@
                     <input type="text" class="form-control" id="description" name="description" value="${commodity.description}"/>
                 </div>
                 <div class="form-group">
-                    <label for="classId">
+                    <label>
                         分类
-                    </label>
-                    <input type="text" class="form-control" id="classId" name="classId" value="${commodity.classId}"/>
+                    </label><br/>
+                    <input type="hidden" class="form-control" id="classId" name="classId" value="${commodity.classId}"/>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span id="className">请选择分类</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                            <c:forEach items="${classes}" var="item">
+                                <li><a href="javascript:;" class="js-select"  data-value="${item.id}">${item.name}</a></li>
+                                <c:if test="${commodity.classId == item.id}">
+                                    <script>
+                                        $("#className").text("${item.name}");
+                                    </script>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>
@@ -99,5 +114,13 @@
 </div>
 
 <jsp:include page="../common/footer.jsp"></jsp:include>
+<script>
+    $(function () {
+      $(".js-select").click(function(){
+        $("#classId").val($(this).data("value"));
+        $("#className").text($(this).text());
+      });
+    });
+</script>
 </body>
 </html>

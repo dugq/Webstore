@@ -130,7 +130,7 @@
 <script id="shop" type="text/html">
 	<div class="col-md-3">
 		<div class="thumbnail">
-			<img alt="Bootstrap Thumbnail Third" src="{{imgUrl}}" style="height: 200px;" />
+			<img alt="Bootstrap Thumbnail Third" onerror="this.src='/static/image/label3.jpg'" src="{{imgUrl}}" style="height: 200px;" />
 			<div class="caption">
 				<h3>
 					{{name}}

@@ -26,4 +26,6 @@ public interface SquirrelCommodityService {
     List<SquirrelCommodity> selectByShopId(Integer id, Pagination page);
 
     List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(String name, Integer shopId, Integer classId, String sortType,int pageIndex);
+
+    List<SquirrelCommodityDto> selectHotList();
 }

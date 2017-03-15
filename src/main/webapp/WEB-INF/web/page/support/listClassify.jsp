@@ -59,7 +59,6 @@
                     <th>名称</th>
                     <th>商品总数</th>
                     <th>创建时间</th>
-                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -69,11 +68,10 @@
                         <td>${item.name}</td>
                         <td>${item.count}</td>
                         <td><fmt:formatDate value="${item.creationTime}" pattern="yyyy年MM月dd日"></fmt:formatDate> </td>
-                        <td><a>修改</a><a>删除</a></td>
                     </tr>
                 </c:forEach>
                 <tr>
-                    <td colspan="4"></td>
+                    <td colspan="3"></td>
                     <td><button id="add">新增</button></td>
                 </tr>
                 </tbody>
@@ -94,13 +92,12 @@
             }
         }).trigger("resize");
 
-        var newTr ='<td>'+$('tr').length+'</td>'+
+        var newTr ='<td>'+($('tr').length-1)+'</td>'+
             '<td><input name="name1"/></td>'+
             '<td>0</td>'+
-            '<td></td>'+
             '<td><button id="commit">提交</button><button id="cancle">取消</button></td>';
 
-        var addTr = ' <td colspan="4"></td>'+
+        var addTr = ' <td colspan="3"></td>'+
             '<td><button id="add">新增</button></td>';
 
         $(document).on("click","#add",function(){

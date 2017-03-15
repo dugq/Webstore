@@ -1,5 +1,6 @@
 package pojo.dto;
 
+import com.alibaba.fastjson.JSON;
 import pojo.entity.SquirrelCommodity;
 
 /**
@@ -15,5 +16,10 @@ public class SquirrelCommodityDto extends SquirrelCommodity {
 
     public void setSaleNum(int saleNum) {
         this.saleNum = saleNum;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

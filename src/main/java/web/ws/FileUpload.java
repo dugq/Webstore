@@ -18,7 +18,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("file")
 public class FileUpload extends BasicController{
-    String filePath = "/opt/data";
+    String filePath = "/files";
 
     @RequestMapping("upload")
     @ResponseBody

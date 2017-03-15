@@ -24,4 +24,5 @@ public interface UserShopsRelaService {
     List<UserShopsRelaDto> selectDtosByUserId(Integer userId);
 
     List<UserShopsRelaDto> selectDtosByShopIdAndStutas(Integer pageIndex, Integer shopId,Byte status);
+
 }

@@ -177,8 +177,10 @@
         </if>
       </trim>
     </where>
-
   </select>
 
+  <select id="selectHotListId" resultMap="dtoMap">
+    select a.sale_num,b.* from (select shop_id , count(*) sale_num from user_shops_rela GROUP BY shop_id) a,squirrel_commodity b where a.shop_id = b.id
+  </select>
 
 </mapper>

@@ -22,4 +22,5 @@ public interface UserShopsRelaMapper {
     List<UserShopsRelaDto> selectDtosByUserId(Integer userId);
 
     List<UserShopsRelaDto> selectDtosByShopIdAndStatus(@Param("shopId") Integer shopId, @Param("status") Byte status);
+
 }

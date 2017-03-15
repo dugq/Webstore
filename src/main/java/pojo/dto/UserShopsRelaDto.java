@@ -11,6 +11,15 @@ public class UserShopsRelaDto extends UserShopsRela {
     private String name;
     private Double price;
     private String description;
+    private Integer sales;
+
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
+    }
 
     public String getName() {
         return name;

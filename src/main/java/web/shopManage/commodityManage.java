@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.dto.ForegroundPagination;
 import pojo.dto.JsonResponse;
 import pojo.dto.Pagination;
+import pojo.dto.SquirrelClassificationDto;
 import pojo.entity.SquirrelCommodity;
 import pojo.entity.SquirrelShops;
 import pojo.entity.SquirrelUser;
+import service.SquirrelClassificationService;
 import service.SquirrelCommodityService;
 import service.SquirrelShopsService;
 
@@ -32,6 +34,8 @@ public class commodityManage extends BasicController{
     private SquirrelShopsService squirrelShopsService;
     @Autowired
     private SquirrelCommodityService squirrelCommodityService;
+    @Autowired
+    private SquirrelClassificationService squirrelClassificationService;
 
     @RequestMapping
     public String index(int pageIndex, Model model){
@@ -96,6 +100,8 @@ public class commodityManage extends BasicController{
 
     @RequestMapping("toAddCommodity")
     public String toAddCommodity(Integer id,Model model){
+        List<SquirrelClassificationDto> squirrelClassificationDtos = squirrelClassificationService.selectAllDtos();
+        model.addAttribute("classes",squirrelClassificationDtos);
         if(id!=null){
             SquirrelCommodity squirrelCommodity = squirrelCommodityService.selectByPrimaryKey(id);
             model.addAttribute("commodity" ,squirrelCommodity);

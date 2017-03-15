@@ -8,6 +8,7 @@ import pojo.dto.Pagination;
 import pojo.dto.SquirrelCommodityDto;
 import pojo.entity.SquirrelCommodity;
 import pojo.entity.SquirrelShops;
+import service.UserShopsRelaService;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
 public class SquirrelCommodityServiceImpl implements service.SquirrelCommodityService {
     @Autowired
     private SquirrelCommodityMapper squirrelCommodityMapper;
+    @Autowired
+    private UserShopsRelaService userShopsRelaService;
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return squirrelCommodityMapper.deleteByPrimaryKey(id);
@@ -58,5 +61,11 @@ public class SquirrelCommodityServiceImpl implements service.SquirrelCommoditySe
     public List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(String name, Integer shopId, Integer classId, String sortType,int pageIndex) {
         PageHelper.startPage(pageIndex,4,sortType);
         return squirrelCommodityMapper.selectDtoByNameShopIdClassIdAndSortType(name,shopId,classId);
+    }
+
+    @Override
+    public List<SquirrelCommodityDto> selectHotList() {
+        PageHelper.startPage(1,10," sale_num DESC");
+       return squirrelCommodityMapper.selectHotListId();
     }
 }

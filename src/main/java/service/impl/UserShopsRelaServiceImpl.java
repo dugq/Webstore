@@ -56,4 +56,5 @@ public class UserShopsRelaServiceImpl implements service.UserShopsRelaService {
         PageHelper.startPage(pageIndex,10);
         return userShopsRelaMapper.selectDtosByShopIdAndStatus(shopId,status);
     }
+
 }

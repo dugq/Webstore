@@ -48,6 +48,8 @@ public class Webstore extends BasicController{
         model.addAttribute("classId",classId);
         model.addAttribute("shopId",shopId);
         model.addAttribute("name",name);
+        List<SquirrelCommodityDto> squirrelCommodityDtos = squirrelCommodityService.selectHotList();
+        model.addAttribute("list",squirrelCommodityDtos);
         return "websotre/search";
     }
 
