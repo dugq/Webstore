@@ -28,9 +28,15 @@
 	</jsp:include>
 	<div class="row" style="margin-top: 71px;">
 		<div class="col-md-2">
-			<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#FF905B;margin-top:43px;">
+			<ul class="nav nav-pills nav-stacked nav-pills-stacked-example"  style="background-color:#31b0d5;margin-top:43px;">
 				<c:forEach items="${list}" var="item" end="11">
-				<li role="presentation" style="boder:1px solid black;"><a href="${pageContext.request.contextPath}/webstore/webstore?classId=${item.id}">${item.name}</a></li>
+				<li role="presentation" style="border-bottom:1px solid #bce8f1;">
+					<a href="${pageContext.request.contextPath}/webstore/webstore?classId=${item.id}" style="color: #fff;">
+						<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>&nbsp;
+						${item.name}
+						<span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="float: right;"></span>
+					</a>
+				</li>
 				</c:forEach>
 		</ul>
 		</div>
