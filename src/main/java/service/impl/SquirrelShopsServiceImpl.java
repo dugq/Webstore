@@ -66,4 +66,10 @@ public class SquirrelShopsServiceImpl implements service.SquirrelShopsService {
         PageHelper.startPage(pageIndex,12,"creation_time");
         return squirrelShopsMapper.selectAll();
     }
+
+    @Override
+    public List<SquirrelShopsDto> selectBySalesDesc(Integer sales){
+        return squirrelShopsMapper.selectBySalesDesc(sales);
+    }
+
 }

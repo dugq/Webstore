@@ -25,4 +25,6 @@ public interface SquirrelCommodityMapper {
     List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(@Param("name") String name, @Param("shopsId") Integer shopId, @Param("classId") Integer classId);
 
     List<SquirrelCommodityDto> selectHotListId();
+
+    SquirrelCommodity selectCommodityBySales(Integer sales);
 }

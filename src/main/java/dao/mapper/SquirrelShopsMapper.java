@@ -23,4 +23,6 @@ public interface SquirrelShopsMapper {
     List<SquirrelShops> selectAll();
 
     List<SquirrelShopsDto> selectAllDto();
+
+    List<SquirrelShopsDto> selectBySalesDesc(Integer sales);
 }

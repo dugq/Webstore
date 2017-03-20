@@ -28,4 +28,6 @@ public interface SquirrelCommodityService {
     List<SquirrelCommodityDto> selectDtoByNameShopIdClassIdAndSortType(String name, Integer shopId, Integer classId, String sortType,int pageIndex);
 
     List<SquirrelCommodityDto> selectHotList();
+
+    SquirrelCommodity selectCommodityBySales(Integer sales);
 }

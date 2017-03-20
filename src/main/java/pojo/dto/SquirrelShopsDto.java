@@ -11,11 +11,32 @@ public class SquirrelShopsDto extends SquirrelShops {
 
     private String shopkeeperName;
 
+    private Integer sales;
+    private String commodityName;
+
     public String getShopkeeperName() {
         return shopkeeperName;
     }
 
     public void setShopkeeperName(String shopkeeperName) {
         this.shopkeeperName = shopkeeperName;
+    }
+
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
+    }
+
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+
+    public String getCommodityName() {
+        return commodityName;
     }
 }

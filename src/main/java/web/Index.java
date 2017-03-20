@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.dto.JsonResponse;
 import pojo.dto.SquirrelClassificationDto;
 import pojo.entity.SquirrelShops;
+import pojo.dto.SquirrelShopsDto;
+import pojo.entity.SquirrelCommodity;
 import service.SquirrelClassificationService;
+import service.SquirrelShopsService;
+import service.SquirrelCommodityService;
 import service.SquirrelShopsService;
 
 import java.util.List;
@@ -21,13 +25,24 @@ import java.util.List;
 public class Index {
     @Autowired
     private SquirrelClassificationService squirrelClassificationService;
+
     @Autowired
     private SquirrelShopsService squirrelShopsService;
+    @Autowired
+    private SquirrelCommodityService squirrelCommodityService;
 
     @RequestMapping
-    public String index(Model model){
+    public String index(Model model,Integer sales){
         List<SquirrelClassificationDto> list = squirrelClassificationService.selectAllDtos();
+        SquirrelShopsDto shopsDto = new SquirrelShopsDto();
+        if(null!=sales) {
+            SquirrelCommodity commodity = squirrelCommodityService.selectCommodityBySales(sales);
+            shopsDto.setSales(commodity.getSales());
+            shopsDto.setCommodityName(commodity.getName());
+        }
+        List<SquirrelShopsDto> shopList=squirrelShopsService.selectBySalesDesc(shopsDto.getSales());
         model.addAttribute("list",list);
+        model.addAttribute("shopList",shopList);
         return "index";
     }
 
@@ -39,4 +54,7 @@ public class Index {
         response.put("list",squirrelShopss);
         return response;
     }
+
+
+
 }

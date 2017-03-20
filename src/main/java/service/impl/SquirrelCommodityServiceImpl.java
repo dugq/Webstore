@@ -68,4 +68,10 @@ public class SquirrelCommodityServiceImpl implements service.SquirrelCommoditySe
         PageHelper.startPage(1,10," sale_num DESC");
        return squirrelCommodityMapper.selectHotListId();
     }
+
+    @Override
+    public SquirrelCommodity selectCommodityBySales(Integer sales){
+        return squirrelCommodityMapper.selectCommodityBySales(sales);
+    }
+
 }

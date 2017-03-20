@@ -10,6 +10,16 @@
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="pojo.dto.SquirrelShopsDto" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="creation_time" property="creationTime" jdbcType="TIMESTAMP" />
+    <result column="shopkeeper" property="shopkeeper" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, creation_time, shopkeeper, description, img_url,status
   </sql>
@@ -18,6 +28,12 @@
     <include refid="Base_Column_List" />
     from squirrel_shops
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectBySalesDesc" resultMap="BaseResultMap1" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />,(select count(*) from user_shops_rela WHERE shop_id=squirrel_shops.id) sales
+    from squirrel_shops
+    ORDER BY sales DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from squirrel_shops

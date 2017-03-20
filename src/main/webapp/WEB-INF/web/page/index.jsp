@@ -99,21 +99,11 @@
 			<h4 style="color:red;">hot:</h4>
 			<table class="table">
 			  <tbody>
+			  <c:forEach items="${shopList}" var="shop" end="10">
 				<tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-				</tr><tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-				</tr><tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-				</tr><tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-				</tr><tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-				</tr><tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
-				</tr><tr>
-				  <td><h6>h6. Bootstrap heading <small>Secondary text</small></h6></td>
+				  <td><h6>${shop.name} <small>${shop.commodityName}</small></h6></td>
 				</tr>
+			  </c:forEach>
 			  </tbody>
 			</table>
 		  </div>
