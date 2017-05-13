@@ -1,5 +1,6 @@
 package web.support;
 
+import com.github.pagehelper.PageInfo;
 import internal.basic.BasicController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.Enum.UserTypeEnum;
-import pojo.dto.JsonResponse;
-import pojo.dto.SquirrelClassificationDto;
-import pojo.dto.SquirrelShopsDto;
+import pojo.dto.*;
 import pojo.entity.SquirrelClassification;
+import pojo.entity.SquirrelCommodity;
 import pojo.entity.SquirrelShops;
 import pojo.entity.SquirrelUser;
 import service.SquirrelClassificationService;
+import service.SquirrelCommodityService;
 import service.SquirrelShopsService;
 import service.SquirrelUserService;
 
@@ -33,6 +34,8 @@ public class Index extends BasicController{
     private SquirrelClassificationService squirrelClassificationService;
     @Autowired
     private SquirrelUserService squirrelUserService;
+    @Autowired
+    private SquirrelCommodityService squirrelCommodityService;
 
     @RequestMapping("index")
     private String index(Model model){
@@ -69,6 +72,26 @@ public class Index extends BasicController{
         model.addAttribute("list",dtos);
         return "support/listShops";
     }
+    @RequestMapping("shopManage/show")
+    public String showShop( Model model,int shopId){
+        SquirrelShops shop = squirrelShopsService.selectByPrimaryKey(shopId);
+        model.addAttribute("shop",shop);
+        return "support/listShop";
+    }
+
+    @RequestMapping("shopManage/showCommdity")
+    public String showCommdity( Model model,int shopId,int pageIndex){
+        Pagination page = new Pagination(pageIndex,10);
+        List<SquirrelCommodity> commodities = squirrelCommodityService.selectByShopId(shopId,page);
+        PageInfo pageInfo = new PageInfo(commodities);
+        ForegroundPagination forePage = ForegroundPagination.valueOf(pageInfo);
+        forePage.setNavigatePage(5);
+        forePage.setUrl("/support/shopManage/showCommdity?");
+        model.addAttribute("page",forePage);
+        model.addAttribute("commodities",commodities);
+        return "support/showCommdty";
+    }
+
 
     @RequestMapping("shopManage/modifyShop")
     @ResponseBody

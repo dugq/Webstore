@@ -69,7 +69,7 @@
                             <c:if test="${item.status==3}">
                                 <button class="js-modify" data-value="1" data-id="${item.id}">停牌</button>
                             </c:if>
-                            <button data-id="${item.id}">查看</button>
+                            <button class="js-show" data-id="${item.id}">查看</button>
                         </td>
                        </tr>
                     </c:forEach>
@@ -86,7 +86,7 @@
     {{if status==3}}
     <button class="js-modify" data-value="1" data-id="{{id}}">停牌</button>
     {{/if}}
-    <button data-id="{{id}}">查看</button>
+    <button class="js-show" data-id="{{id}}">查看</button>
 </script>
 <script>
   $(function(){
@@ -113,7 +113,9 @@
         }
       });
     });
-
+      $(".js-show").on("click",function(){
+          window.location.href = "${pageContext.request.contextPath}/support/shopManage/show?shopId="+$(this).data("id");
+      });
   })
 </script>
 </body>
