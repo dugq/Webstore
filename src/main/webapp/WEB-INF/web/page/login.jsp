@@ -53,10 +53,9 @@
                     <div class="center">
                         <h1>
                             <i class="ace-icon fa fa-leaf green"></i>
-                            <span class="red">Ace</span>
-                            <span class="white" id="id-text2">Application</span>
+                            <span class="white" id="id-text2">请登录</span>
                         </h1>
-                        <h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+                        <h4 class="blue" id="id-company-text">&copy; 农贸市场</h4>
                     </div>
 
                     <div class="space-6"></div>
@@ -67,7 +66,7 @@
                                 <div class="widget-main">
                                     <h4 class="header blue lighter bigger">
                                         <i class="ace-icon fa fa-coffee green"></i>
-                                        Please Enter Your Information
+                                        请输入您的账号密码
                                     </h4>
 
                                     <div class="space-6"></div>
@@ -93,7 +92,7 @@
                                             <div class="clearfix">
                                                 <button type="button" class="width-35 pull-right btn btn-sm btn-primary js-login">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">Login</span>
+                                                    <span class="bigger-110">登录</span>
                                                 </button>
                                             </div>
 
@@ -102,7 +101,7 @@
                                     </form>
 
                                     <div class="social-or-login center">
-                                        <span class="bigger-110">messages</span>
+                                        <span class="bigger-110"></span>
                                     </div>
 
                                     <div class="space-6"></div>
@@ -112,15 +111,15 @@
                                 <span style="color: green; text-align: center; margin-left: 30px;" class="js-login-message"></span>
                                 <div class="toolbar clearfix">
                                     <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                                      <%--  <a href="#" data-target="#forgot-box" class="forgot-password-link">
                                             <i class="ace-icon fa fa-arrow-left"></i>
                                             I forgot my password
-                                        </a>
+                                        </a>--%>
                                     </div>
 
                                     <div>
                                         <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            I want to register
+                                            立即注册
                                             <i class="ace-icon fa fa-arrow-right"></i>
                                         </a>
                                     </div>
@@ -174,44 +173,44 @@
                                 <div class="widget-main">
                                     <h4 class="header green lighter bigger">
                                         <i class="ace-icon fa fa-users blue"></i>
-                                        New User Registration
+                                        注册页
                                     </h4>
 
                                     <div class="space-6"></div>
-                                    <p> Enter your details to begin: </p>
+                                    <p> 请输入您的个人信息: </p>
 
                                     <form>
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control js-email" placeholder="Email" />
+															<input type="email" class="form-control js-email" placeholder="邮箱" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control js-real-name" placeholder="realName" />
+															<input type="text" class="form-control js-real-name" placeholder="真是姓名" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control js-user-name" placeholder="Username" />
+															<input type="text" class="form-control js-user-name" placeholder="用户名/登录名" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control js-password" placeholder="Password" />
+															<input type="password" class="form-control js-password" placeholder="密码" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control js-re-password" placeholder="Repeat password" />
+															<input type="password" class="form-control js-re-password" placeholder="确认密码" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
                                             </label>
@@ -219,8 +218,8 @@
                                             <label class="block">
                                                 <input type="checkbox" class="ace js-accept-agreement" />
                                                 <span class="lbl">
-															I accept the
-															<a href="#">User Agreement</a>
+															我接受
+															<a href="javascript:;" onclick="alert('最终解释权归农贸市场管理员所有！')">用户协议</a>
 														</span>
                                             </label>
 
@@ -232,11 +231,11 @@
                                             <div class="clearfix">
                                                 <button type="reset" class="width-30 pull-left btn btn-sm">
                                                     <i class="ace-icon fa fa-refresh"></i>
-                                                    <span class="bigger-110">Reset</span>
+                                                    <span class="bigger-110">重置</span>
                                                 </button>
 
                                                 <button type="button" class="width-65 pull-right btn btn-sm btn-success js-register">
-                                                    <span class="bigger-110">Register</span>
+                                                    <span class="bigger-110">立即注册</span>
 
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                 </button>
@@ -248,7 +247,7 @@
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
                                         <i class="ace-icon fa fa-arrow-left"></i>
-                                        Back to login
+                                        返回登录
                                     </a>
                                 </div>
                             </div><!-- /.widget-body -->
@@ -258,15 +257,15 @@
                     <div class="navbar-fixed-top align-right">
                         <br />
                         &nbsp;
-                        <a id="btn-login-dark" href="#">Dark</a>
+                        <a id="btn-login-dark" href="#">黑色</a>
                         &nbsp;
                         <span class="blue">/</span>
                         &nbsp;
-                        <a id="btn-login-blur" href="#">Blur</a>
+                        <a id="btn-login-blur" href="#">蓝色</a>
                         &nbsp;
                         <span class="blue">/</span>
                         &nbsp;
-                        <a id="btn-login-light" href="#">Light</a>
+                        <a id="btn-login-light" href="#">白色</a>
                         &nbsp; &nbsp; &nbsp;
                     </div>
                 </div>
